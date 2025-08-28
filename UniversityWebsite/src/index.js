@@ -1,14 +1,13 @@
-import express from "express";
-import path from "path";
+import cookieParser from "cookie-parser";
+import express, { json, urlencoded } from "express";
+import { CLIENT_DIR, PORT } from "./consts";
+import { authMiddleware } from "./middlewares/auth";
+import indexRouter from "./routes";
 
 const app = express();
-const PORT = process.env.PORT || 3000;
-
-const distDir = path.join(__dirname, "..", "client", "dist");
 
 app.use(
-    express.static(distDir, {
-        index: false,
+    express.static(CLIENT_DIR, {
         maxAge: "7d",
         setHeaders: (res, filePath) => {
             if (filePath.endsWith(".html")) {
@@ -18,10 +17,13 @@ app.use(
     })
 );
 
-app.get("/", (req, res) => {
-    res.sendFile(path.join(distDir, "index.html"));
-});
+app.use(json());
+app.use(urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(authMiddleware);
+app.use(indexRouter);
 
 app.listen(PORT, () => {
-    console.log(`Serer is live on http://localhost:${PORT}`);
+    console.log(`Server is now running on PORT ${PORT}`);
+    console.log(`If developing, please visit http://localhost:${PORT}`);
 });
