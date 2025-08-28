@@ -1,41 +1,26 @@
 {
   "name": "university-website",
   "version": "1.0.0",
-  "description": "",
-  "main": "dist/index.js",
-  "workspaces": [
-    "client/*"
-  ],
+  "private": true,
   "engines": {
     "node": ">=20.0.0"
   },
   "scripts": {
-    "format": "prettier --write src client/src",
-    "build": "pnpm run build:server && pnpm run build:client",
-    "build:server": "node esbuild.config.mjs",
-    "build:client": "pnpm --filter client/* run build",
-    "start": "node dist/index.cjs",
-    "db:push": "drizzle-kit push",
-    "db:generate": "drizzle-kit generate",
-    "db:migrate": "drizzle-kit migrate"
+    "format": "prettier --write **/src/**",
+    "build": "pnpm -r --filter ./packages/* run build",
+    "lint": "pnpm -r --filter ./packages/* run lint",
+    "typecheck": "pnpm -r --filter ./packages/* run typecheck",
+    "precommit": "pnpm -r --filter ./packages/* run precommit"
   },
-  "keywords": [],
-  "author": "",
   "license": "MIT",
   "packageManager": "pnpm@10.11.0",
-  "devDependencies": {
-    "@types/node": "^24.3.0",
-    "@types/pg": "^8.15.5",
-    "drizzle-kit": "^0.31.4",
-    "esbuild": "^0.25.9",
-    "prettier": "^3.6.2"
-  },
   "dependencies": {
-    "cookie-parser": "^1.4.7",
-    "dotenv": "^17.2.1",
-    "drizzle-orm": "^0.44.5",
-    "express": "^5.1.0",
-    "jsonwebtoken": "^9.0.2",
-    "pg": "^8.16.3"
+    "@types/node": "^24.3.0",
+    "@typescript-eslint/eslint-plugin": "^8.41.0",
+    "@typescript-eslint/parser": "^8.41.0",
+    "eslint": "^9.34.0",
+    "eslint-config-prettier": "^10.1.8",
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.2"
   }
 }

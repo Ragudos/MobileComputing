@@ -1,0 +1,32 @@
+.header {
+    justify-content: space-between;
+
+    padding: var(--space-md) var(--space-lg);
+
+    gap: var(--space-lg);
+}
+
+.header,
+.navigation,
+.navigationList {
+    display: flex;
+    align-items: center;
+}
+
+.navigation {
+    gap: var(--space-lg);
+}
+
+.navigationList {
+    gap: var(--space-md);
+
+    li a {
+        color: hsl(var(--clr-foreground) / var(--_text-opacity, 1));
+
+        --_text-opacity: 0.75;
+    }
+
+    li a[aria-current="page"] {
+        --_text-opacity: 1;
+    }
+}

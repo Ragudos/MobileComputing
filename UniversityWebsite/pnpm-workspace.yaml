@@ -1,6 +1,2 @@
 packages:
-  - client
-onlyBuiltDependencies:
-  - '@swc/core'
-  - bcrypt
-  - esbuild
+  - packages/*
