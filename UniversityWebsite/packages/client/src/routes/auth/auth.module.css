@@ -1,0 +1,39 @@
+.authContainer {
+    min-height: max(100dvh, 400px);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.waveContainer {
+    position: fixed;
+    overflow: hidden;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100dvh;
+
+    z-index: -1;
+
+    svg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: max(100%, 800px);
+
+        transform: scale(-1);
+    }
+}
+
+.contentContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+
+    gap: var(--space-xl);
+}

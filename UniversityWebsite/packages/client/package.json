@@ -11,8 +11,8 @@
         "typecheck": "tsc -p tsconfig.json --noEmit"
     },
     "dependencies": {
-        "@university-website/shared": "workspace:*",
         "@tanstack/react-query": "^5.85.5",
+        "@university-website/shared": "workspace:*",
         "react": "^19.1.1",
         "react-dom": "^19.1.1",
         "react-i18next": "^15.7.2",

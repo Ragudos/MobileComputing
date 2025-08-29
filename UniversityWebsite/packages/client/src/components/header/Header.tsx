@@ -1,3 +1,4 @@
+import { combineClassesOrNone } from "@/lib/utils";
 import { NavLink } from "react-router";
 import { AuthButton } from "./auth_button/AuthButton";
 import headerStyles from "./header.module.css";
@@ -21,7 +22,9 @@ export const NAVIGATION_LINKS: NavigationLink[] = [
 
 export function Header() {
     return (
-        <header className={headerStyles.header}>
+        <header
+            className={combineClassesOrNone("container", headerStyles.header)}
+        >
             <Logo />
             <nav className={headerStyles.navigation}>
                 <ul className={headerStyles.navigationList}>

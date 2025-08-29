@@ -11,16 +11,18 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
         | "success"
         | "outline"
         | "default";
+    size?: "small" | "medium" | "large" | "icon" | "any";
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-    ({ className, variant = "default", ...props }, ref) => {
+    ({ className, variant = "default", size = "any", ...props }, ref) => {
         return (
             <button
                 ref={ref}
                 className={combineClassesOrNone(
                     buttonStyles.button,
                     buttonStyles[variant],
+                    buttonStyles[size],
                     className
                 )}
                 {...props}

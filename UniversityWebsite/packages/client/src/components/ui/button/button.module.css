@@ -1,0 +1,109 @@
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: var(--radius-half);
+
+    padding: var(--space-2) var(--space-4);
+
+    will-change: transform, background-color, color, border-color, box-shadow;
+    transition:
+        background-color 0.2s,
+        color 0.2s,
+        border-color 0.2s,
+        box-shadow 0.2s;
+
+    &:focus-visible {
+        box-shadow:
+            0 0 0 1px hsl(var(--clr-background)),
+            0 0 0 2px hsl(var(--clr-border));
+    }
+}
+
+.button.primary,
+.button.secondary,
+.button.destructive,
+.button.success,
+.button.default {
+    &:hover {
+        --_background-opacity: 1;
+    }
+    &:active {
+        --_background-opacity: 0.87;
+    }
+}
+
+.button.primary {
+    background-color: hsl(
+        var(--clr-primary) / var(--_background-opacity, 0.67)
+    );
+    color: hsl(var(--clr-primary-foreground) / var(--_text-opacity, 1));
+}
+
+.button.secondary {
+    background-color: hsl(
+        var(--clr-secondary) / var(--_background-opacity, 0.67)
+    );
+    color: hsl(var(--clr-secondary-foreground) / var(--_text-opacity, 1));
+}
+
+.button.ghost {
+    background-color: transparent;
+    color: hsl(var(--clr-foreground) / var(--_text-opacity, 1));
+
+    &:hover {
+        background-color: hsl(
+            var(--clr-accent) / var(--_background-opacity, 0.25)
+        );
+        color: hsl(var(--clr-foreground) / var(--_text-opacity, 1));
+    }
+
+    &:active {
+        --_background-opacity: 0.125;
+    }
+}
+
+.button.destructive {
+    background-color: hsl(
+        var(--clr-destructive) / var(--_background-opacity, 0.67)
+    );
+    color: hsl(var(--clr-destructive-foreground) / var(--_text-opacity, 1));
+}
+
+.button.success {
+    background-color: hsl(
+        var(--clr-success) / var(--_background-opacity, 0.67)
+    );
+    color: hsl(var(--clr-success-foreground) / var(--_text-opacity, 1));
+}
+
+.button.outline {
+    background-color: transparent;
+    color: hsl(var(--clr-foreground) / var(--_text-opacity, 1));
+    border: 1px solid hsl(var(--clr-border) / var(--_border-opacity, 1));
+
+    &:hover {
+        background-color: hsl(
+            var(--clr-foreground) / var(--_background-opacity, 0.25)
+        );
+        color: hsl(var(--clr-background) / var(--_text-opacity, 1));
+    }
+
+    &:active {
+        --_background-opacity: 0.175;
+    }
+}
+
+.button.default {
+    background-color: hsl(
+        var(--clr-foreground) / var(--_background-opacity, 0.67)
+    );
+    color: hsl(var(--clr-background) / var(--_text-opacity, 1));
+}
+
+.button.icon {
+    width: 32px;
+    height: 32px;
+    padding: 0.25rem;
+}

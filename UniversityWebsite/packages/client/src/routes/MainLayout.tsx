@@ -2,7 +2,7 @@ import { Footer } from "@/components/footer/Footer";
 import { Header } from "@/components/header/Header";
 import { Outlet } from "react-router";
 
-function IndexPage() {
+function MainLayout() {
     return (
         <>
             <Header />
@@ -12,4 +12,4 @@ function IndexPage() {
     );
 }
 
-export default IndexPage;
+export default MainLayout;
