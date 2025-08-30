@@ -1,5 +1,6 @@
 import { lazy, Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router";
+import LoadingSpinner from "./components/loaders/LoadingSpinner";
 
 const NotFound = lazy(() => import("./routes/NotFound"));
 const Layout = lazy(() => import("./routes/MainLayout"));
@@ -8,6 +9,9 @@ const AboutPage = lazy(() => import("./routes/about/AboutPage"));
 const AuthLayout = lazy(() => import("./routes/auth/AuthLayout"));
 const LoginPage = lazy(() => import("./routes/auth/login/LoginPage"));
 const RegisterPage = lazy(() => import("./routes/auth/register/RegisterPage"));
+const RegisterSuccessPage = lazy(
+    () => import("./routes/auth/register_success/RegisterSuccessPage")
+);
 
 function App() {
     return (
@@ -24,7 +28,11 @@ function App() {
                     <Route
                         index
                         element={
-                            <Suspense>
+                            <Suspense
+                                fallback={
+                                    <LoadingSpinner message="Loading..." />
+                                }
+                            >
                                 <HomePage />
                             </Suspense>
                         }
@@ -32,7 +40,11 @@ function App() {
                     <Route
                         path="about"
                         element={
-                            <Suspense>
+                            <Suspense
+                                fallback={
+                                    <LoadingSpinner message="Loading..." />
+                                }
+                            >
                                 <AboutPage />
                             </Suspense>
                         }
@@ -49,7 +61,11 @@ function App() {
                     <Route
                         path="login"
                         element={
-                            <Suspense>
+                            <Suspense
+                                fallback={
+                                    <LoadingSpinner message="Loading..." />
+                                }
+                            >
                                 <LoginPage />
                             </Suspense>
                         }
@@ -57,8 +73,24 @@ function App() {
                     <Route
                         path="register"
                         element={
-                            <Suspense>
+                            <Suspense
+                                fallback={
+                                    <LoadingSpinner message="Loading..." />
+                                }
+                            >
                                 <RegisterPage />
+                            </Suspense>
+                        }
+                    />
+                    <Route
+                        path="register_success"
+                        element={
+                            <Suspense
+                                fallback={
+                                    <LoadingSpinner message="Loading..." />
+                                }
+                            >
+                                <RegisterSuccessPage />
                             </Suspense>
                         }
                     />

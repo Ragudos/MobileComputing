@@ -1,0 +1,29 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+}
+
+.step {
+    transition-property: background-color, color;
+    will-change: background-color, color;
+    transition-duration: 0.2s;
+    transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+    width: 2em;
+    height: 2em;
+    border: 1px solid hsl(var(--clr-border) / var(--_border-opacity, 1));
+    color: hsl(var(--clr-muted) / var(--_text-opacity, 1));
+
+    border-radius: 100%;
+
+    font-weight: 700;
+
+    display: grid;
+    place-items: center;
+}
+
+.step[aria-current="step"] {
+    background-color: hsl(var(--clr-muted) / var(--_background-opacity, 1));
+    color: hsl(var(--clr-muted-foreground) / var(--_text-opacity, 1));
+}

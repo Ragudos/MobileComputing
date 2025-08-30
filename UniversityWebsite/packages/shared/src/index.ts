@@ -1,5 +1,6 @@
 export type UserRole = "student" | "professor" | "admin";
 export type Gender = "male" | "female" | "non-binary" | "other";
+export type Program = (typeof programs)[number];
 
 export type User = {
     email: string;
@@ -8,14 +9,37 @@ export type User = {
     dateOfBirth: Date;
     gender: Gender;
     biography: string;
-    program: string;
+    program: Program;
     yearLevel: number;
     graduationYear: number;
     role: UserRole;
 };
 
+export const MAX_YEAR_LEVEL = 6;
+export const MIN_YEAR_LEVEL = 1;
+export const MAX_FIRST_NAME = 256;
+export const MAX_LAST_NAME = 256;
+export const programs = [
+    "(BSCS) Bachelor of Science in Computer Science",
+    "(BSIT) Bachelor of Science in Information Technology",
+    "(BSIS) Bachelor of Science in Information Systems",
+    "(BSBA) Bachelor of Science in Business Administration",
+    "(BSA) Bachelor of Science in Accountancy",
+    "(BSP) Bachelor of Science in Psychology",
+    "(ABCOMM) Bachelor of Arts in Communication",
+    "(BEED) Bachelor of Elementary Education",
+    "(BSED) Bachelor of Secondary Education",
+    "(BSCE) Bachelor of Science in Civil Engineering",
+    "(BSEE) Bachelor of Science in Electrical Engineering",
+    "(BSME) Bachelor of Science in Mechanical Engineering",
+    "(BSARCH) Bachelor of Science in Architecture", // ✅ architecture included
+    "(BSN) Bachelor of Science in Nursing",
+    "(BSHM) Bachelor of Science in Hospitality Management",
+    "(BSTM) Bachelor of Science in Tourism Management",
+] as const;
+
 export const PASSWORD_PATTERN_MISMATCH_ERROR_MSG =
-    "Must be at least 8 characters, include 1 uppercase and lowercase letter, 1 number, and 1 special character.";
+    "Must be 8-64 characters, include 1 uppercase and lowercase letter, 1 number, and 1 special character.";
 export const INVALID_EMAIL_ERROR_MSG = "Invalid email address";
 
 /**
@@ -29,7 +53,7 @@ export const INVALID_EMAIL_ERROR_MSG = "Invalid email address";
  * - One special character
  */
 export const PASSWORD_PATTERN =
-    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,64}$/;
 
 /**
  * @see https://stackoverflow.com/questions/201323/how-can-i-validate-an-email-address-using-a-regular-expression

@@ -2,6 +2,7 @@ import "@/styles/global.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import { Toaster } from "sonner";
 import App from "./App";
 import { AuthContextProvider } from "./context/AuthContext";
 
@@ -15,6 +16,7 @@ const queryClient = new QueryClient();
 
 createRoot(appElement).render(
     <StrictMode>
+        <Toaster />
         <QueryClientProvider client={queryClient}>
             <AuthContextProvider>
                 <App />
