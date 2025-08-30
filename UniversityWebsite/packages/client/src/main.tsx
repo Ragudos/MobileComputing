@@ -16,7 +16,7 @@ const queryClient = new QueryClient();
 
 createRoot(appElement).render(
     <StrictMode>
-        <Toaster />
+        <Toaster richColors={true} />
         <QueryClientProvider client={queryClient}>
             <AuthContextProvider>
                 <App />

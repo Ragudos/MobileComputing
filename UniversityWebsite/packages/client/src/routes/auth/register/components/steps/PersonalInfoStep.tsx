@@ -99,6 +99,7 @@ function PersonalInfoStep() {
                     required
                     min="1900-01-01"
                     max={DATE_TODAY}
+                    autoComplete="bday"
                     value={dateOfBirth?.toISOString().split("T")[0] || ""}
                     onChange={changeDateOfBirth}
                     aria-errormessage="date-of-birth-error"

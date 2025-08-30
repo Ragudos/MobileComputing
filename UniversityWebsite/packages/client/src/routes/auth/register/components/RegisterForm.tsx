@@ -1,7 +1,8 @@
 import LoadingSpinner from "@/components/loaders/LoadingSpinner";
 import { Button } from "@/components/ui/button/Button";
-import { API_URL } from "@/lib/consts";
+import { API_URL, ROUTES } from "@/lib/consts";
 import { extractErrorMessage } from "@/lib/utils";
+import { isErrorCode, RegisterPayload } from "@university-website/shared";
 import { FormEvent, lazy, Suspense, useRef, useState } from "react";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
@@ -28,7 +29,7 @@ function RegisterForm() {
         lastName,
         dateOfBirth,
         gender,
-        program,
+        universityProgram,
         yearLevel,
         graduationYear,
         honeypot,
@@ -36,6 +37,7 @@ function RegisterForm() {
         nextStep,
         validateThirdStep,
         setHoneypot,
+        setFieldErrors,
     } = useRegisterStore();
 
     const [isLoading, setIsLoading] = useState(false);
@@ -64,18 +66,22 @@ function RegisterForm() {
                 lastName,
                 dateOfBirth,
                 gender,
-                program,
+                universityProgram,
                 yearLevel,
                 graduationYear,
                 honeypot,
-            });
+            } as RegisterPayload);
 
             toast.success("Account created successfully!", { id });
 
-            navigate("/auth/registration_success", { replace: true });
+            navigate(ROUTES.AUTH.REGISTER_SUCCESS, { replace: true });
         } catch (err) {
             console.error(err);
             toast.error(extractErrorMessage(err), { id });
+
+            if (isErrorCode(err)) {
+                setFieldErrors(err.payload);
+            }
         } finally {
             setIsLoading(false);
         }

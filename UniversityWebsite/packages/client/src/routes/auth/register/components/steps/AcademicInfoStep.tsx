@@ -5,16 +5,16 @@ import { YEAR_TODAY } from "@/lib/consts";
 import {
     MAX_YEAR_LEVEL,
     MIN_YEAR_LEVEL,
-    Program,
-    programs,
+    UNIVERSITY_PROGRAMS,
+    UniversityProgram,
 } from "@university-website/shared";
 import { ChangeEvent } from "react";
 import { useRegisterStore } from "../../store";
 
 function AcademicInfoStep() {
     const {
-        program,
-        setProgram,
+        universityProgram,
+        setUniversityProgram,
         programError,
         setProgramError,
         yearLevel,
@@ -28,7 +28,7 @@ function AcademicInfoStep() {
     } = useRegisterStore();
 
     function changeProgram(e: ChangeEvent<HTMLSelectElement>) {
-        setProgram((e.target.value as Program) || null);
+        setUniversityProgram((e.target.value as UniversityProgram) || null);
         setProgramError("");
     }
 
@@ -50,14 +50,14 @@ function AcademicInfoStep() {
                     id="program"
                     name="program"
                     required
-                    defaultValue={program || ""}
+                    defaultValue={universityProgram || ""}
                     onChange={changeProgram}
                     aria-errormessage="program-error"
                 >
                     <option value="" disabled>
                         Select your program
                     </option>
-                    {programs.map((prog) => (
+                    {UNIVERSITY_PROGRAMS.map((prog) => (
                         <option key={prog} value={prog}>
                             {prog}
                         </option>

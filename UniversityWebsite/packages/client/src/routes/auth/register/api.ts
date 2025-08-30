@@ -1,22 +1,8 @@
-import { API_URL } from "@/lib/consts";
-import { RegisterState } from "./store";
+import { API } from "@/lib/consts";
+import { RegisterPayload } from "@university-website/shared";
 
-export async function registerUser(
-    payload: Pick<
-        RegisterState,
-        | "email"
-        | "password"
-        | "firstName"
-        | "lastName"
-        | "dateOfBirth"
-        | "gender"
-        | "program"
-        | "yearLevel"
-        | "graduationYear"
-        | "honeypot"
-    >
-) {
-    const response = await fetch(`${API_URL}/auth/register`, {
+export async function registerUser(payload: RegisterPayload) {
+    const response = await fetch(API.AUTH.REGISTER, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -24,7 +10,7 @@ export async function registerUser(
 
     if (!response.ok) {
         const error = await response.json().catch(() => ({}));
-        throw new Error(error.message || "Failed to register");
+        throw error;
     }
 
     return response.json();

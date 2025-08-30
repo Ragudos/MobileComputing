@@ -1,4 +1,9 @@
 import {
+    GENDERS,
+    UNIVERSITY_PROGRAMS,
+    USER_ROLES,
+} from "@university-website/shared";
+import {
     foreignKey,
     integer,
     pgSchema,
@@ -10,7 +15,12 @@ import {
 
 const schema = pgSchema("university_website");
 
-const roles = schema.enum("userRoles", ["student", "professor", "admin"]);
+const universityPrograms = schema.enum(
+    "university_programs",
+    UNIVERSITY_PROGRAMS
+);
+const roles = schema.enum("userRoles", USER_ROLES);
+const gender = schema.enum("gender", GENDERS);
 
 const users = schema.table("users", {
     id: serial("user_id").primaryKey().notNull(),
@@ -19,6 +29,11 @@ const users = schema.table("users", {
     firstName: varchar("firstName", { length: 256 }).notNull(),
     lastName: varchar("lastName", { length: 256 }).notNull(),
     role: roles("role").default("student").notNull(),
+    gender: gender("gender").notNull(),
+    universityProgram: universityPrograms("university_program").notNull(),
+    yearLevel: integer("year_level").notNull(),
+    graduationYear: integer("graduation_year").notNull(),
+    dateOfBirth: timestamp("date_of_birth").notNull(),
 });
 
 const accounts = schema.table(

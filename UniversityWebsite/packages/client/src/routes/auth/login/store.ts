@@ -1,9 +1,4 @@
-import {
-    emailValidator,
-    INVALID_EMAIL_ERROR_MSG,
-    PASSWORD_PATTERN_MISMATCH_ERROR_MSG,
-    passwordValidator,
-} from "@university-website/shared";
+import { emailValidator, passwordValidator } from "@university-website/shared";
 import { create } from "zustand";
 
 interface LoginState {
@@ -34,28 +29,27 @@ export const useLoginStore = create<LoginState>((set, get) => {
         clearEmailError: () => set({ emailError: "" }),
         clearPasswordError: () => set({ passwordError: "" }),
         validateStepOne: () => {
-            const isEmailValid = emailValidator(get().email);
+            const emailValidationResult = emailValidator(get().email);
 
-            if (!isEmailValid) {
-                set({ emailError: INVALID_EMAIL_ERROR_MSG });
-            }
+            set({ emailError: emailValidationResult.errorMessage });
 
-            return isEmailValid;
+            return emailValidationResult.isValid;
         },
         validateStepTwo: () => {
             const { email, password } = get();
 
-            const isEmailValid = emailValidator(email);
-            const isPasswordValid = passwordValidator(password);
+            const emailValidationResult = emailValidator(email);
+            const passwordValidationResult = passwordValidator(password);
 
             set({
-                emailError: isEmailValid ? "" : INVALID_EMAIL_ERROR_MSG,
-                passwordError: isPasswordValid
-                    ? ""
-                    : PASSWORD_PATTERN_MISMATCH_ERROR_MSG,
+                emailError: emailValidationResult.errorMessage,
+                passwordError: passwordValidationResult.errorMessage,
             });
 
-            return isEmailValid && isPasswordValid;
+            return (
+                emailValidationResult.isValid &&
+                passwordValidationResult.isValid
+            );
         },
         nextStep: () => {
             set({ currentStep: get().currentStep + 1 });

@@ -1,14 +1,13 @@
 import { YEAR_TODAY } from "@/lib/consts";
 import {
     emailValidator,
+    FieldError,
     Gender,
-    INVALID_EMAIL_ERROR_MSG,
     MAX_FIRST_NAME,
     MAX_LAST_NAME,
     MIN_YEAR_LEVEL,
-    PASSWORD_PATTERN_MISMATCH_ERROR_MSG,
     passwordValidator,
-    Program,
+    UniversityProgram,
 } from "@university-website/shared";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
@@ -28,7 +27,7 @@ export interface RegisterState {
     genderError: string;
 
     // second step
-    program?: Program | null;
+    universityProgram?: UniversityProgram | null;
     yearLevel: number;
     graduationYear: number;
     programError: string;
@@ -53,7 +52,7 @@ export interface RegisterState {
     setDateOfBirthError: (error: string) => void;
     setGenderError: (error: string) => void;
 
-    setProgram: (program: Program | null) => void;
+    setUniversityProgram: (program: UniversityProgram | null) => void;
     setYearLevel: (level: number) => void;
     setGraduationYear: (year: number) => void;
 
@@ -70,6 +69,8 @@ export interface RegisterState {
     validateFirstStep: () => boolean;
     validateSecondStep: () => boolean;
     validateThirdStep: () => boolean;
+
+    setFieldErrors: (errors: FieldError[]) => void;
 
     nextStep: () => void;
     previousStep: () => void;
@@ -97,7 +98,7 @@ export const useRegisterStore = create<RegisterState>()(
             dateOfBirthError: "",
             genderError: "",
 
-            program: null,
+            universityProgram: null,
             yearLevel: MIN_YEAR_LEVEL,
             graduationYear: YEAR_TODAY,
             programError: "",
@@ -123,7 +124,9 @@ export const useRegisterStore = create<RegisterState>()(
                 set({ dateOfBirthError: error }),
             setGenderError: (error: string) => set({ genderError: error }),
 
-            setProgram: (program: Program | null) => set({ program }),
+            setUniversityProgram: (
+                universityProgram: UniversityProgram | null
+            ) => set({ universityProgram }),
             setYearLevel: (level: number) => set({ yearLevel: level }),
             setGraduationYear: (year: number) => set({ graduationYear: year }),
 
@@ -172,15 +175,18 @@ export const useRegisterStore = create<RegisterState>()(
             },
 
             validateSecondStep: () => {
-                const { program, yearLevel, graduationYear } = get();
+                const { universityProgram, yearLevel, graduationYear } = get();
 
-                const isProgramValid =
-                    program !== null && program !== undefined;
+                const isUniversityProgramValid =
+                    universityProgram !== null &&
+                    universityProgram !== undefined;
                 const isYearLevelValid = yearLevel > 0;
                 const isGraduationYearValid = graduationYear >= YEAR_TODAY;
 
                 set({
-                    programError: isProgramValid ? "" : "Invalid program",
+                    programError: isUniversityProgramValid
+                        ? ""
+                        : "Invalid program",
                     yearLevelError: isYearLevelValid
                         ? ""
                         : "Invalid year level",
@@ -190,25 +196,27 @@ export const useRegisterStore = create<RegisterState>()(
                 });
 
                 return (
-                    isProgramValid && isYearLevelValid && isGraduationYearValid
+                    isUniversityProgramValid &&
+                    isYearLevelValid &&
+                    isGraduationYearValid
                 );
             },
 
             validateThirdStep: () => {
-                const { email, password, currentStep } = get();
+                const { email, password } = get();
 
-                const isEmailValid = emailValidator(email);
-                const isPasswordValid = passwordValidator(password);
-                console.log("hi");
+                const emailValidationResult = emailValidator(email);
+                const passwordValidationResult = passwordValidator(password);
 
                 set({
-                    emailError: isEmailValid ? "" : INVALID_EMAIL_ERROR_MSG,
-                    passwordError: isPasswordValid
-                        ? ""
-                        : PASSWORD_PATTERN_MISMATCH_ERROR_MSG,
+                    emailError: emailValidationResult.errorMessage,
+                    passwordError: passwordValidationResult.errorMessage,
                 });
 
-                return isEmailValid && isPasswordValid;
+                return (
+                    emailValidationResult.isValid &&
+                    passwordValidationResult.isValid
+                );
             },
 
             nextStep: () => {
@@ -241,7 +249,7 @@ export const useRegisterStore = create<RegisterState>()(
                     lastName: "",
                     dateOfBirth: null,
                     gender: null,
-                    program: null,
+                    universityProgram: null,
                     yearLevel: MIN_YEAR_LEVEL,
                     graduationYear: YEAR_TODAY,
                     email: "",
@@ -257,6 +265,17 @@ export const useRegisterStore = create<RegisterState>()(
                     passwordError: "",
                 });
                 sessionStorage.removeItem(SESSION_STORAGE_KEY);
+            },
+
+            setFieldErrors: (errors: FieldError[]) => {
+                const errorMap = Object.fromEntries(
+                    errors.map((error) => [
+                        `${error.fieldName}Error`,
+                        error.message,
+                    ])
+                );
+
+                set(errorMap);
             },
         }),
         {

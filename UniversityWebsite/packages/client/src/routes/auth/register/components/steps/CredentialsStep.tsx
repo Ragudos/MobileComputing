@@ -2,7 +2,7 @@ import InputError from "@/components/InputError";
 import { Button } from "@/components/ui/button/Button";
 import Input from "@/components/ui/input/Input";
 import PasswordInput from "@/components/ui/input/PasswordInput";
-import { generateRandomPassword } from "@/lib/utils";
+import { generateRandomPassword } from "@university-website/shared";
 import { ChangeEvent } from "react";
 import { useRegisterStore } from "../../store";
 import credentialsStepStyles from "./credentials_step.module.css";
