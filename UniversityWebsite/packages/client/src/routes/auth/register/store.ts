@@ -1,7 +1,6 @@
 import { YEAR_TODAY } from "@/lib/consts";
 import {
     emailValidator,
-    FieldError,
     Gender,
     MAX_FIRST_NAME,
     MAX_LAST_NAME,
@@ -69,8 +68,6 @@ export interface RegisterState {
     validateFirstStep: () => boolean;
     validateSecondStep: () => boolean;
     validateThirdStep: () => boolean;
-
-    setFieldErrors: (errors: FieldError[]) => void;
 
     nextStep: () => void;
     previousStep: () => void;
@@ -265,17 +262,6 @@ export const useRegisterStore = create<RegisterState>()(
                     passwordError: "",
                 });
                 sessionStorage.removeItem(SESSION_STORAGE_KEY);
-            },
-
-            setFieldErrors: (errors: FieldError[]) => {
-                const errorMap = Object.fromEntries(
-                    errors.map((error) => [
-                        `${error.fieldName}Error`,
-                        error.message,
-                    ])
-                );
-
-                set(errorMap);
             },
         }),
         {

@@ -61,7 +61,7 @@ function PersonalInfoStep() {
     return (
         <>
             <div className="form-input-container">
-                <label htmlFor="first-name">First Name</label>
+                <label htmlFor="first-name">First Name*</label>
                 <Input
                     id="first-name"
                     name="first-name"
@@ -76,7 +76,7 @@ function PersonalInfoStep() {
                 <InputError id="first-name-error" message={firstNameError} />
             </div>
             <div className="form-input-container">
-                <label htmlFor="last-name">Last Name</label>
+                <label htmlFor="last-name">Last Name*</label>
                 <Input
                     id="last-name"
                     name="last-name"
@@ -91,7 +91,7 @@ function PersonalInfoStep() {
                 <InputError id="last-name-error" message={lastNameError} />
             </div>
             <div className="form-input-container">
-                <label htmlFor="date-of-birth">Date of Birth</label>
+                <label htmlFor="date-of-birth">Date of Birth*</label>
                 <Input
                     type="date"
                     id="date-of-birth"
@@ -110,7 +110,7 @@ function PersonalInfoStep() {
                 />
             </div>
             <div className="form-input-container">
-                <label htmlFor="gender">Gender</label>
+                <label htmlFor="gender">Gender*</label>
                 <Select
                     id="gender"
                     name="gender"

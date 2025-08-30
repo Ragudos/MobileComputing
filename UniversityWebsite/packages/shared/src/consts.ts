@@ -84,3 +84,12 @@ export const REQUIRED_REGISTER_FIELDS = {
     yearLevel: "yearLevel",
     graduationYear: "graduationYear",
 } as const;
+
+export const ACCOUNT_VERIFICATION_EXPIRATION_DURATION = 1000 * 60 * 60; // 1 hour
+
+export const INVALID_VERIFICATION_TOKEN_REASONS = {
+    MISSING: "Verification token is missing",
+    NONEXISTENT: "Verification token does not exist. There might be a new one.",
+    ALREADY_VERIFIED: "Verification token has already been verified",
+    EXPIRED: "Verification token has expired",
+} as const;

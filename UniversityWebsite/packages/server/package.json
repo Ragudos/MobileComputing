@@ -9,7 +9,8 @@
         "start": "node dist/index.cjs",
         "lint": "eslint 'src/**/*.{ts,js}'",
         "typecheck": "tsc -p tsconfig.json --noEmit",
-        "db:push": "drizzle-kit push"
+        "db:push": "drizzle-kit push --config ./drizzle.config.ts",
+        "db:pull": "drizzle-kit pull --config ./drizzle.config.ts"
     },
     "dependencies": {
         "@university-website/shared": "workspace:*",
@@ -18,8 +19,11 @@
         "dotenv": "^17.2.1",
         "drizzle-orm": "^0.44.5",
         "express": "^5.1.0",
+        "express-rate-limit": "^8.0.1",
+        "googleapis": "^159.0.0",
         "jsonwebtoken": "^9.0.2",
         "morgan": "^1.10.1",
+        "nodemailer": "^7.0.5",
         "pg": "^8.16.3"
     },
     "devDependencies": {
@@ -28,6 +32,7 @@
         "@types/express": "^5.0.3",
         "@types/jsonwebtoken": "^9.0.10",
         "@types/morgan": "^1.9.10",
+        "@types/nodemailer": "^7.0.1",
         "@types/pg": "^8.15.5",
         "drizzle-kit": "^0.31.4",
         "esbuild": "^0.25.9",

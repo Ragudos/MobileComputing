@@ -45,7 +45,7 @@ function AcademicInfoStep() {
     return (
         <>
             <div className="form-input-container">
-                <label htmlFor="program">Program</label>
+                <label htmlFor="program">Program*</label>
                 <Select
                     id="program"
                     name="program"
@@ -66,7 +66,7 @@ function AcademicInfoStep() {
                 <InputError id="program-error" message={programError} />
             </div>
             <div className="form-input-container">
-                <label htmlFor="year-level">Year Level</label>
+                <label htmlFor="year-level">Year Level*</label>
                 <Input
                     id="year-level"
                     name="year-level"
@@ -82,7 +82,7 @@ function AcademicInfoStep() {
                 <InputError id="year-level-error" message={yearLevelError} />
             </div>
             <div className="form-input-container">
-                <label htmlFor="graduation-year">Graduation Year</label>
+                <label htmlFor="graduation-year">Graduation Year*</label>
                 <Input
                     id="graduation-year"
                     name="graduation-year"

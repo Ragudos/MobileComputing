@@ -4,6 +4,7 @@ import {
     USER_ROLES,
 } from "@university-website/shared";
 import {
+    boolean,
     foreignKey,
     integer,
     pgSchema,
@@ -19,7 +20,7 @@ const universityPrograms = schema.enum(
     "university_programs",
     UNIVERSITY_PROGRAMS
 );
-const roles = schema.enum("userRoles", USER_ROLES);
+const userRoles = schema.enum("user_roles", USER_ROLES);
 const gender = schema.enum("gender", GENDERS);
 
 const users = schema.table("users", {
@@ -28,7 +29,7 @@ const users = schema.table("users", {
     updatedAt: timestamp("updated_at").defaultNow().notNull(),
     firstName: varchar("firstName", { length: 256 }).notNull(),
     lastName: varchar("lastName", { length: 256 }).notNull(),
-    role: roles("role").default("student").notNull(),
+    role: userRoles("role").default("student").notNull(),
     gender: gender("gender").notNull(),
     universityProgram: universityPrograms("university_program").notNull(),
     yearLevel: integer("year_level").notNull(),
@@ -58,4 +59,37 @@ const accounts = schema.table(
     ]
 );
 
-export { accounts, schema, users };
+const accountVerification = schema.table(
+    "account_verifications",
+    {
+        id: serial("account_verification_id").primaryKey().notNull(),
+        accountId: integer("account_id")
+            .references(() => accounts.id)
+            .unique()
+            .notNull(),
+        createdAt: timestamp("created_at").defaultNow().notNull(),
+        updatedAt: timestamp("updated_at").defaultNow().notNull(),
+        verified: boolean("verified").default(false).notNull(),
+        expiresOn: timestamp("expires_on").notNull(),
+        verificationToken: varchar("verification_token", {
+            length: 256,
+        }).notNull(),
+    },
+    (t) => [
+        foreignKey({
+            columns: [t.accountId],
+            foreignColumns: [accounts.id],
+            name: "fk_account_verification",
+        }),
+    ]
+);
+
+export {
+    accounts,
+    accountVerification,
+    gender,
+    schema,
+    universityPrograms,
+    userRoles,
+    users,
+};

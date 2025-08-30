@@ -1,5 +1,9 @@
 import CircleCheck from "@/components/svg/CircleCheck";
 import { combineClassesOrNone } from "@/lib/utils";
+import {
+    ACCOUNT_VERIFICATION_EXPIRATION_DURATION,
+    msToTextDuration,
+} from "@university-website/shared";
 import { Link } from "react-router";
 import registerSuccessStyles from "./register_success.module.css";
 
@@ -13,11 +17,13 @@ function RegisterSuccessPage() {
                     <h1 className="h6">Registration Successful</h1>
                     <CircleCheck />
                 </div>
-                <p>Your account has been created successfully!</p>
+                <p>
+                    A confirmation email has been sent to your email address. It
+                    will expire in{" "}
+                    {msToTextDuration(ACCOUNT_VERIFICATION_EXPIRATION_DURATION)}
+                </p>
             </div>
-            <Link className="link" to="/auth/login">
-                Go to Login
-            </Link>
+            <Link to="/">Go to home</Link>
         </div>
     );
 }

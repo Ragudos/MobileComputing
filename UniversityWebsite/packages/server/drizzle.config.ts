@@ -9,7 +9,8 @@ if (!DATABASE_URL) {
 
 export default defineConfig({
     out: "./drizzle",
-    schema: "./src/db/schema.js",
+    schema: "./src/lib/db/schema.ts",
+    schemaFilter: ["public", "university_website"],
     dialect: "postgresql",
     dbCredentials: {
         url: DATABASE_URL,

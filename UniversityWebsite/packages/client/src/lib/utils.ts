@@ -1,4 +1,4 @@
-import { isErrorCode } from "@university-website/shared";
+import { GenericError } from "@university-website/shared";
 import { Ref, RefObject } from "react";
 
 export function concatenateStrings(...strings: string[]): string {
@@ -29,7 +29,7 @@ export function extractErrorMessage(err: unknown): string {
         return err.message;
     } else if (typeof err === "string") {
         return err;
-    } else if (isErrorCode(err)) {
+    } else if (GenericError.isGenericError(err)) {
         return err.message;
     } else {
         return "An unexpected error occurred. Please try again.";

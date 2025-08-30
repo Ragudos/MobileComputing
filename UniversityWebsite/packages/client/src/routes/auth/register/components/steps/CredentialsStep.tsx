@@ -37,7 +37,7 @@ function CredentialsStep() {
     return (
         <>
             <div className="form-input-container">
-                <label htmlFor="email">Email</label>
+                <label htmlFor="email">Email*</label>
                 <Input
                     value={email}
                     onChange={changeEmail}
@@ -55,7 +55,7 @@ function CredentialsStep() {
             </div>
             <div className="form-input-container">
                 <div className={credentialsStepStyles.passwordContainer}>
-                    <label htmlFor="password">Password</label>
+                    <label htmlFor="password">Password*</label>
                     <Button
                         variant="secondary"
                         onClick={generatePassword}

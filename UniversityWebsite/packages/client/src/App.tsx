@@ -12,6 +12,24 @@ const RegisterPage = lazy(() => import("./routes/auth/register/RegisterPage"));
 const RegisterSuccessPage = lazy(
     () => import("./routes/auth/register_success/RegisterSuccessPage")
 );
+const EmailVerificationSuccessPage = lazy(
+    () =>
+        import(
+            "./routes/auth/email_verification_success/EmailVerificationSuccessPage"
+        )
+);
+const InvalidTokenPage = lazy(
+    () => import("./routes/auth/invalid_token/InvalidTokenPage")
+);
+const ResendVerificationPage = lazy(
+    () => import("./routes/auth/resend_verification/ResendVerificationPage")
+);
+const ResendVerificationSuccessPage = lazy(
+    () =>
+        import(
+            "./routes/auth/resend_verification_success/ResendVerificationSuccessPage"
+        )
+);
 
 function App() {
     return (
@@ -83,7 +101,7 @@ function App() {
                         }
                     />
                     <Route
-                        path="register_success"
+                        path="register-success"
                         element={
                             <Suspense
                                 fallback={
@@ -91,6 +109,54 @@ function App() {
                                 }
                             >
                                 <RegisterSuccessPage />
+                            </Suspense>
+                        }
+                    />
+                    <Route
+                        path="email-verification-success"
+                        element={
+                            <Suspense
+                                fallback={
+                                    <LoadingSpinner message="Loading..." />
+                                }
+                            >
+                                <EmailVerificationSuccessPage />
+                            </Suspense>
+                        }
+                    />
+                    <Route
+                        path="invalid-token"
+                        element={
+                            <Suspense
+                                fallback={
+                                    <LoadingSpinner message="Loading..." />
+                                }
+                            >
+                                <InvalidTokenPage />
+                            </Suspense>
+                        }
+                    />
+                    <Route
+                        path="resend-verification"
+                        element={
+                            <Suspense
+                                fallback={
+                                    <LoadingSpinner message="Loading..." />
+                                }
+                            >
+                                <ResendVerificationPage />
+                            </Suspense>
+                        }
+                    />
+                    <Route
+                        path="resend-verification-success"
+                        element={
+                            <Suspense
+                                fallback={
+                                    <LoadingSpinner message="Loading..." />
+                                }
+                            >
+                                <ResendVerificationSuccessPage />
                             </Suspense>
                         }
                     />

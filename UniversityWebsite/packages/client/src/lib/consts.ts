@@ -17,7 +17,11 @@ const ROUTES = {
         REGISTER: "/auth/register",
         LOGIN: "/auth/login",
         LOGOUT: "/auth/logout",
-        REGISTER_SUCCESS: "/auth/register_success",
+        EMAIL_VERIFICATION_SUCCESS: "/auth/email-verification-success",
+        INVALID_TOKEN: "/auth/invalid-token",
+        REGISTER_SUCCESS: "/auth/register-success",
+        RESEND_VERIFICATION_SUCCESS: "/auth/resend-verification-success",
+        RESEND_VERIFICATION: "/auth/resend-verification",
     },
 } as const;
 

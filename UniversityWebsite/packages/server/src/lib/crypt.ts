@@ -28,3 +28,7 @@ export function matchPassword(
         Buffer.from(currentPasswordHash, "hex")
     );
 }
+
+export function generateEmailVerificationToken(): string {
+    return randomBytes(32).toString("hex");
+}
