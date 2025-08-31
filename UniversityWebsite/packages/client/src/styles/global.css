@@ -218,3 +218,108 @@ input[type="submit"] {
 .error-text {
     color: red;
 }
+
+.visually-hidden,
+.visually-hidden-focusable:not(:focus, :focus-within) {
+	border: 0 !important;
+	clip-path: inset(50%) !important; /* 2 */
+	height: 1px !important;
+	margin: -1px !important;
+	overflow: hidden !important;
+	padding: 0 !important;
+    border: none !important;
+	width: 1px !important;
+	white-space: nowrap !important; /* 3 */
+}
+
+/*
+	Prevent visually hidden caption from breaking table's collapsing borders
+	@author Louis-Maxime Piton
+	@see https://github.com/twbs/bootstrap/pull/37533
+*/
+.visually-hidden:not(caption),
+.visually-hidden-focusable:not(caption):not(:focus, :focus-within) {
+	position: absolute !important;
+}
+
+
+/*
+	Prevent overflowing children from being focusable.
+	@author Django Janny
+	@see https://github.com/twbs/bootstrap/pull/41286
+*/
+.visually-hidden *,
+.visually-hidden-focusable:not(:focus, :focus-within) * {
+	overflow: hidden !important;
+}
+
+.dropdown {
+    background-color: hsl(var(--clr-background) / var(--_background-opacity, 1));
+    color: hsl(var(--clr-foreground) / var(--_text-opacity, 1));
+
+    animation: slide-down 0.2s ease-out;
+    width: min(95dvw, 10rem);
+
+    border-radius: var(--radius);
+
+    align-items: flex-start;
+
+    box-shadow: 0 2px 4px hsl(0 0% 0% / 0.5),
+    0 4px 8px hsl(0 0% 0% / 0.25);
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+
+    padding: var(--space-1) var(--space-2);
+
+    .dropdown-label {
+        text-align: center;
+    }
+
+    [role=menuitem],
+    .dropdown-label {
+        width: 100%;
+
+        padding: var(--space-2) var(--space-3);
+    }
+}
+
+.dropdown-group {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    [role=menuitem] {
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+@keyframes slide-down {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+.size-4 {
+    width: 16px;
+    height: 16px;
+}
+
+.img-container {
+    img {
+        max-width: 100%;
+        vertical-align: baseline;
+        object-fit: cover;
+    }
+}

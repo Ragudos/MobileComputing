@@ -8,6 +8,8 @@
             "node"
         ],
 
+        "noEmit": true,
+
         "baseUrl": ".",
         "paths": {
             "@/*": ["src/*"]

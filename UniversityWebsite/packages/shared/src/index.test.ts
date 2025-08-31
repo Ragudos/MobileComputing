@@ -1,5 +1,9 @@
 import { expect, test } from "@jest/globals";
-import { generateRandomPassword, passwordValidator } from ".";
+import {
+    generateRandomPassword,
+    passwordValidator,
+    validateDateString,
+} from ".";
 
 test("Validates passwords properly", () => {
     const PASSWORDS = Array.from({ length: 100 }, () =>
@@ -25,4 +29,28 @@ test("Validates passwords properly", () => {
     expect(passwordValidator("Password1!").isValid).toBe(true);
     expect(passwordValidator("P@ssw0rd").isValid).toBe(true);
     expect(passwordValidator("$#@*($@#*").isValid).toBe(false);
+});
+
+test("Validates YYYY-MM-DD properly", () => {
+    const dates = ["2020-01-01", "1999-12-31", "2024-02-29", "2020-04-30"];
+
+    const invalidDates = [
+        "2020-02-30",
+        "2021-02-29",
+        "2020-04-31",
+        "2020-06-31",
+        "9999-12-31",
+    ];
+
+    for (const date of dates) {
+        const result = validateDateString(date);
+
+        expect(result.isValid).toBe(true);
+    }
+
+    for (const date of invalidDates) {
+        const result = validateDateString(date);
+
+        expect(result.isValid).toBe(false);
+    }
 });

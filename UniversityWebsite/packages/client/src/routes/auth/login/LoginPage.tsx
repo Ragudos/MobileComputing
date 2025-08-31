@@ -1,10 +1,18 @@
 import { Button } from "@/components/ui/button/Button";
 import Input from "@/components/ui/input/Input";
 import PasswordInput from "@/components/ui/input/PasswordInput";
-import { API_URL } from "@/lib/consts";
-import { combineClassesOrNone } from "@/lib/utils";
-import { FormEvent } from "react";
-import { Link } from "react-router";
+import { API_URL, REFRESH_NAVIGATION_TYPE } from "@/lib/consts";
+import { useAuth } from "@/lib/hooks";
+import { combineClassesOrNone, extractErrorMessage } from "@/lib/utils";
+import { FormEvent, useEffect, useTransition } from "react";
+import {
+    Link,
+    useLocation,
+    useNavigate,
+    useNavigationType,
+} from "react-router";
+import { toast } from "sonner";
+import { loginUser } from "./api";
 import loginStyles from "./login.module.css";
 import { useLoginStore } from "./store";
 
@@ -15,17 +23,36 @@ function LoginPage() {
         password,
         emailError,
         passwordError,
+        honeypot,
         setEmail,
         setPassword,
+        setHoneypot,
         clearEmailError,
         clearPasswordError,
         validateStepOne,
         validateStepTwo,
         nextStep,
+        clearAll,
     } = useLoginStore();
+    const { refetch } = useAuth();
+
+    const [isPending, startTransition] = useTransition();
+    const navigate = useNavigate();
+    const location = useLocation();
+    const navigationType = useNavigationType();
+
+    useEffect(() => {
+        if (navigationType !== REFRESH_NAVIGATION_TYPE) {
+            clearAll();
+        }
+    }, [location, navigationType]);
 
     function onSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
+
+        if (isPending) {
+            return;
+        }
 
         if (currentStep === 1) {
             if (validateStepOne()) {
@@ -38,6 +65,37 @@ function LoginPage() {
         if (!validateStepTwo()) {
             return;
         }
+
+        const id = toast.loading("Logging in...");
+
+        startTransition(async () => {
+            try {
+                await loginUser({ email, password, honeypot });
+
+                startTransition(async () => {
+                    const { error } = await refetch();
+
+                    if (error) {
+                        console.error(error);
+
+                        toast.error(
+                            extractErrorMessage("Something went wrong"),
+                            { id }
+                        );
+                        return;
+                    }
+
+                    startTransition(() => {
+                        toast.success("Logged in successfully!", { id });
+                        navigate("/", { replace: true });
+                    });
+                });
+            } catch (err) {
+                console.error(err);
+
+                toast.error(extractErrorMessage(err), { id });
+            }
+        });
     }
 
     return (
@@ -96,7 +154,6 @@ function LoginPage() {
                                     autoCapitalize="off"
                                     autoCorrect="off"
                                     autoFocus
-                                    pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
                                     placeholder="Enter your password"
                                     required
                                     aria-errormessage="password-error"
@@ -109,8 +166,20 @@ function LoginPage() {
                                 </small>
                             </div>
                         )}
+                        <input
+                            className="visually-hidden"
+                            type="text"
+                            name="honeypot"
+                            id="honeypot"
+                            value={honeypot}
+                            onChange={(e) => setHoneypot(e.target.value)}
+                        />
                     </div>
-                    <Button variant="primary" type="submit">
+                    <Button
+                        disabled={isPending}
+                        variant="primary"
+                        type="submit"
+                    >
                         {currentStep === 1 ? "Next" : "Login"}
                     </Button>
                 </form>

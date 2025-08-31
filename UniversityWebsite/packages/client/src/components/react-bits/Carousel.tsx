@@ -157,7 +157,14 @@ export default function Carousel({
 
   const carouselItems = loop ? [...items, items[0]] : items;
   // Clamp currentIndex so last window always shows up to visibleCount items
-  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  // Clamp currentIndex to lastGroupFirstIndex on mount and when items/visibleCount change
+  const [currentIndex, setCurrentIndexRaw] = useState<number>(0);
+  const setCurrentIndex = (val: number | ((prev: number) => number)) => {
+    setCurrentIndexRaw(prev => {
+      const next = typeof val === 'function' ? val(prev) : val;
+      return !loop && next > lastGroupFirstIndex ? lastGroupFirstIndex : Math.max(0, next);
+    });
+  };
   // The first index of the last group
   const lastGroupFirstIndex = (totalPages - 1) * visibleCount;
   const maxIndex = Math.max(0, carouselItems.length - visibleCount);
@@ -190,6 +197,8 @@ export default function Carousel({
   }, [pauseOnHover]);
 
   useEffect(() => {
+    // Clamp currentIndex if items/visibleCount change
+    setCurrentIndex(currentIndex);
     if (autoplay && (!pauseOnHover || !isHovered)) {
       const timer = setInterval(() => {
         setCurrentIndex((prev) => {
@@ -201,6 +210,7 @@ export default function Carousel({
       }, autoplayDelay);
       return () => clearInterval(timer);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     autoplay,
     autoplayDelay,
@@ -209,6 +219,7 @@ export default function Carousel({
     lastGroupFirstIndex,
     pauseOnHover,
     visibleCount,
+    items.length
   ]);
 
   const effectiveTransition: Transition = isResetting ? { duration: 0 } : SPRING_OPTIONS;

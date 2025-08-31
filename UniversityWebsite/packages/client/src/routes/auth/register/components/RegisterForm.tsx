@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button/Button";
 import { API_URL, ROUTES } from "@/lib/consts";
 import { extractErrorMessage } from "@/lib/utils";
 import { RegisterPayload } from "@university-website/shared";
-import { FormEvent, lazy, Suspense, useRef, useState } from "react";
+import { FormEvent, lazy, Suspense, useRef, useTransition } from "react";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
 import { registerUser } from "../api";
@@ -39,14 +39,14 @@ function RegisterForm() {
         setHoneypot,
     } = useRegisterStore();
 
-    const [isLoading, setIsLoading] = useState(false);
+    const [isPending, startTransition] = useTransition();
     const navigate = useNavigate();
     const formRef = useRef<HTMLFormElement>(null);
 
     async function onSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
-        if (isLoading) {
+        if (isPending) {
             return;
         }
 
@@ -54,32 +54,35 @@ function RegisterForm() {
             return;
         }
 
-        setIsLoading(true);
         const id = toast.loading("Creating account...");
 
-        try {
-            await registerUser({
-                email,
-                password,
-                firstName,
-                lastName,
-                dateOfBirth,
-                gender,
-                universityProgram,
-                yearLevel,
-                graduationYear,
-                honeypot,
-            } as RegisterPayload);
+        startTransition(async () => {
+            try {
+                await registerUser({
+                    email,
+                    password,
+                    firstName,
+                    lastName,
+                    dateOfBirth,
+                    gender,
+                    universityProgram,
+                    yearLevel,
+                    graduationYear,
+                    honeypot,
+                } as RegisterPayload);
 
-            toast.success("Account created successfully!", { id });
+                startTransition(() => {
+                    toast.success("Account created successfully!", { id });
+                    navigate(ROUTES.AUTH.REGISTER_SUCCESS, { replace: true });
+                });
+            } catch (err) {
+                console.error(err);
 
-            navigate(ROUTES.AUTH.REGISTER_SUCCESS, { replace: true });
-        } catch (err) {
-            console.error(err);
-            toast.error(extractErrorMessage(err), { id });
-        } finally {
-            setIsLoading(false);
-        }
+                startTransition(() => {
+                    toast.error(extractErrorMessage(err), { id });
+                });
+            }
+        });
     }
 
     function onNext() {
@@ -107,7 +110,8 @@ function RegisterForm() {
                     {currentStep === 3 && <CredentialsStep />}
                 </Suspense>
                 <input
-                    type="hidden"
+                    type="text"
+                    className="visually-hidden"
                     name="honeypot"
                     id="honeypot"
                     value={honeypot}
@@ -120,7 +124,7 @@ function RegisterForm() {
                         variant="secondary"
                         onClick={previousStep}
                         type="button"
-                        disabled={isLoading}
+                        disabled={isPending}
                     >
                         Back
                     </Button>
@@ -129,7 +133,7 @@ function RegisterForm() {
                     variant="primary"
                     onClick={onNext}
                     type="button"
-                    disabled={isLoading}
+                    disabled={isPending}
                 >
                     {currentStep === 3 ? "Create Account" : "Continue"}
                 </Button>

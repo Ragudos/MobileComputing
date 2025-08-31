@@ -1,4 +1,7 @@
 packages:
   - packages/*
-ignoredBuiltDependencies:
+onlyBuiltDependencies:
   - unrs-resolver
+syncInjectedDepsAfterScripts:
+  - build
+injectWorkspacePackages: true

@@ -4,7 +4,7 @@ import Input from "@/components/ui/input/Input";
 import { API_URL, ROUTES } from "@/lib/consts";
 import { extractErrorMessage } from "@/lib/utils";
 import { emailValidator } from "@university-website/shared";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState, useTransition } from "react";
 import { useNavigate } from "react-router";
 import { toast } from "sonner";
 import { resendVerificationEmail } from "./api";
@@ -13,14 +13,15 @@ import resendVerificationStyles from "./resend_verification.module.css";
 function ResendVerificationPage() {
     const [email, setEmail] = useState("");
     const [emailError, setEmailError] = useState("");
-    const [isLoading, setIsLoading] = useState(false);
+    const [honeypot, setHoneypot] = useState("");
+    const [isPending, startTransition] = useTransition();
 
     const navigate = useNavigate();
 
     async function onSubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
-        if (isLoading) {
+        if (isPending) {
             return;
         }
 
@@ -36,27 +37,31 @@ function ResendVerificationPage() {
             return;
         }
 
-        setIsLoading(true);
         const id = toast.loading("Sending verification email...");
 
         try {
-            await resendVerificationEmail(email);
+            startTransition(async () => {
+                await resendVerificationEmail(email);
 
-            toast.success("Verification email sent successfully!");
+                startTransition(() => {
+                    toast.success("Verification email sent successfully!");
 
-            navigate(
-                ROUTES.AUTH.RESEND_VERIFICATION_SUCCESS +
-                    "?email=" +
-                    encodeURIComponent(email),
-                {
-                    replace: true,
-                }
-            );
+                    navigate(
+                        ROUTES.AUTH.RESEND_VERIFICATION_SUCCESS +
+                            "?email=" +
+                            encodeURIComponent(email),
+                        {
+                            replace: true,
+                        }
+                    );
+                });
+            });
         } catch (err) {
             console.error(err);
-            toast.error(extractErrorMessage(err), { id });
-        } finally {
-            setIsLoading(false);
+
+            startTransition(() => {
+                toast.error(extractErrorMessage(err), { id });
+            });
         }
     }
 
@@ -106,9 +111,19 @@ function ResendVerificationPage() {
                                         message={emailError}
                                     />
                                 </div>
+                                <input
+                                    type="text"
+                                    className="visually-hidden"
+                                    name="honeypot"
+                                    id="honeypot"
+                                    value={honeypot}
+                                    onChange={(e) =>
+                                        setHoneypot(e.target.value)
+                                    }
+                                />
                             </div>
                             <Button
-                                disabled={isLoading}
+                                disabled={isPending}
                                 type="submit"
                                 variant="primary"
                             >

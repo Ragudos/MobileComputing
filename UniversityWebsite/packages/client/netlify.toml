@@ -1,0 +1,8 @@
+# netlify.toml
+[[redirects]]
+from = "/*"
+status = 200
+to = "/"
+
+[build.environment]
+    NPM_FLAGS="--prefix=/"

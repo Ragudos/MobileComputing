@@ -1,5 +1,9 @@
 import { getLoggedInUser } from "@/lib/api/user";
-import { useQuery } from "@tanstack/react-query";
+import {
+    QueryObserverResult,
+    RefetchOptions,
+    useQuery,
+} from "@tanstack/react-query";
 import type { User } from "@university-website/shared";
 import { createContext, FC, ReactNode } from "react";
 
@@ -7,14 +11,17 @@ type AuthContextType = {
     user: User | null | undefined;
     isLoading: boolean;
     error: Error | null;
-    refetch: () => void;
+    refetch: (
+        options?: RefetchOptions
+    ) => Promise<QueryObserverResult<User | null, Error>>;
 };
 
 const AuthContext = createContext<AuthContextType>({
     user: null,
     isLoading: false,
     error: null,
-    refetch: () => {},
+    refetch: () =>
+        Promise.resolve({} as QueryObserverResult<User | null, Error>),
 });
 
 const AuthContextProvider: FC<{ children: ReactNode }> = ({ children }) => {

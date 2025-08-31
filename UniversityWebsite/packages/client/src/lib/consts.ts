@@ -23,6 +23,9 @@ const ROUTES = {
         RESEND_VERIFICATION_SUCCESS: "/auth/resend-verification-success",
         RESEND_VERIFICATION: "/auth/resend-verification",
     },
+    PROTECTED: {
+        PROFILE: "/profile",
+    },
 } as const;
 
 if (!API_URL) {
@@ -37,3 +40,4 @@ export {
     ROUTES,
     YEAR_TODAY,
 };
+
