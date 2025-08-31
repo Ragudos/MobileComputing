@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
-import { motion, PanInfo, useMotionValue, useTransform } from "motion/react";
-// replace icons with your own if needed
+import { motion, PanInfo, useMotionValue } from "framer-motion";
+import type { Transition } from "framer-motion";
 import { FiBookOpen, FiBriefcase, FiCpu, FiUsers } from "react-icons/fi";
 import "./Carousel.css";
 
@@ -19,6 +19,7 @@ export interface CarouselProps {
   pauseOnHover?: boolean;
   loop?: boolean;
   round?: boolean;
+  visibleCount?: number; // NEW: number of items to show at once
 }
 
 const DEFAULT_ITEMS: CarouselItem[] = [
@@ -118,12 +119,25 @@ const DEFAULT_ITEMS: CarouselItem[] = [
     id: 16,
     icon: <FiBriefcase className="carousel-icon" />,
   },
+  {
+    title: "BS Criminology",
+    description: "Bachelor of Science in Criminology",
+    id: 17,
+    icon: <FiUsers className="carousel-icon" />,
+  },
+  {
+    title: "BS Pharmacy",
+    description: "Bachelor of Science in Pharmacy",
+    id: 18,
+    icon: <FiBookOpen className="carousel-icon" />,
+  },
 ];
+
 
 const DRAG_BUFFER = 0;
 const VELOCITY_THRESHOLD = 500;
 const GAP = 16;
-const SPRING_OPTIONS = { type: "spring", stiffness: 300, damping: 30 };
+const SPRING_OPTIONS: Transition = { type: "spring", stiffness: 300, damping: 30 };
 
 export default function Carousel({
   items = DEFAULT_ITEMS,
@@ -133,13 +147,29 @@ export default function Carousel({
   pauseOnHover = false,
   loop = false,
   round = false,
+  visibleCount = 1,
 }: CarouselProps): React.JSX.Element {
+
+  // Calculate item width so visibleCount items fit in baseWidth (with gaps)
   const containerPadding = 16;
-  const itemWidth = baseWidth - containerPadding * 2;
-  const trackItemOffset = itemWidth + GAP;
+  // Calculate number of pages for indicators
+  const totalPages = Math.ceil(items.length / visibleCount);
 
   const carouselItems = loop ? [...items, items[0]] : items;
+  // Clamp currentIndex so last window always shows up to visibleCount items
   const [currentIndex, setCurrentIndex] = useState<number>(0);
+  // The first index of the last group
+  const lastGroupFirstIndex = (totalPages - 1) * visibleCount;
+  const maxIndex = Math.max(0, carouselItems.length - visibleCount);
+  // Now that currentIndex is defined, calculate currentPage and last page logic
+  const currentPage = Math.floor(currentIndex / visibleCount);
+  const isLastPage = currentPage === totalPages - 1;
+  const itemsOnLastPage = items.length % visibleCount === 0 ? visibleCount : items.length % visibleCount;
+  const currentVisibleCount = isLastPage ? itemsOnLastPage : visibleCount;
+  const totalGap = GAP * (currentVisibleCount - 1);
+  const itemWidth = (baseWidth - containerPadding * 2 - totalGap) / currentVisibleCount;
+  const trackItemOffset = itemWidth + GAP;
+  // totalPages already calculated above
   const x = useMotionValue(0);
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const [isResetting, setIsResetting] = useState<boolean>(false);
@@ -163,13 +193,10 @@ export default function Carousel({
     if (autoplay && (!pauseOnHover || !isHovered)) {
       const timer = setInterval(() => {
         setCurrentIndex((prev) => {
-          if (prev === items.length - 1 && loop) {
-            return prev + 1;
+          if (prev >= lastGroupFirstIndex) {
+            return loop ? 0 : lastGroupFirstIndex;
           }
-          if (prev === carouselItems.length - 1) {
-            return loop ? 0 : prev;
-          }
-          return prev + 1;
+          return Math.min(prev + visibleCount, lastGroupFirstIndex);
         });
       }, autoplayDelay);
       return () => clearInterval(timer);
@@ -179,12 +206,12 @@ export default function Carousel({
     autoplayDelay,
     isHovered,
     loop,
-    items.length,
-    carouselItems.length,
+    lastGroupFirstIndex,
     pauseOnHover,
+    visibleCount,
   ]);
 
-  const effectiveTransition = isResetting ? { duration: 0 } : SPRING_OPTIONS;
+  const effectiveTransition: Transition = isResetting ? { duration: 0 } : SPRING_OPTIONS;
 
   const handleAnimationComplete = () => {
     if (loop && currentIndex === carouselItems.length - 1) {
@@ -202,17 +229,12 @@ export default function Carousel({
     const offset = info.offset.x;
     const velocity = info.velocity.x;
     if (offset < -DRAG_BUFFER || velocity < -VELOCITY_THRESHOLD) {
-      if (loop && currentIndex === items.length - 1) {
-        setCurrentIndex(currentIndex + 1);
-      } else {
-        setCurrentIndex((prev) => Math.min(prev + 1, carouselItems.length - 1));
-      }
+      setCurrentIndex((prev) => {
+        const next = prev + visibleCount;
+        return !loop && next > lastGroupFirstIndex ? lastGroupFirstIndex : Math.min(next, lastGroupFirstIndex);
+      });
     } else if (offset > DRAG_BUFFER || velocity > VELOCITY_THRESHOLD) {
-      if (loop && currentIndex === 0) {
-        setCurrentIndex(items.length - 1);
-      } else {
-        setCurrentIndex((prev) => Math.max(prev - 1, 0));
-      }
+      setCurrentIndex((prev) => Math.max(prev - visibleCount, 0));
     }
   };
 
@@ -239,38 +261,42 @@ export default function Carousel({
         drag="x"
         {...dragProps}
         style={{
-          width: itemWidth,
+          width: `${(itemWidth + GAP) * carouselItems.length - GAP}px`,
+          display: 'flex',
           gap: `${GAP}px`,
           perspective: 1000,
           perspectiveOrigin: `${currentIndex * trackItemOffset + itemWidth / 2}px 50%`,
           x,
         }}
         onDragEnd={handleDragEnd}
-        animate={{ x: -(currentIndex * trackItemOffset) }}
+        animate={{
+          x:
+            !loop && currentIndex >= lastGroupFirstIndex
+              ? -(lastGroupFirstIndex * trackItemOffset)
+              : -(currentIndex * trackItemOffset),
+        }}
         transition={effectiveTransition}
         onAnimationComplete={handleAnimationComplete}
       >
         {carouselItems.map((item, index) => {
-          const range = [
-            -(index + 1) * trackItemOffset,
-            -index * trackItemOffset,
-            -(index - 1) * trackItemOffset,
-          ];
-          const outputRange = [90, 0, -90];
-          const rotateY = useTransform(x, range, outputRange, { clamp: false });
+          if (!item) return null;
+          // Only adjust width for items in the last page
+          let thisItemWidth = itemWidth;
+          if (isLastPage && index >= currentPage * visibleCount) {
+            thisItemWidth = (baseWidth - containerPadding * 2 - totalGap) / itemsOnLastPage;
+          }
           return (
             <motion.div
               key={index}
               className={`carousel-item ${round ? "round" : ""}`}
               style={{
-                width: itemWidth,
-                height: round ? itemWidth : "100%",
-                rotateY: rotateY,
+                width: thisItemWidth,
+                height: round ? thisItemWidth : "100%",
                 ...(round && { borderRadius: "50%" }),
               }}
               transition={effectiveTransition}
             >
-              <div className={`carousel-item-header ${round ? "round" : ""}`}>
+              <div className={`carousel-item-header ${round ? "round" : ""}`}> 
                 <span className="carousel-icon-container">{item.icon}</span>
               </div>
               <div className="carousel-item-content">
@@ -283,19 +309,30 @@ export default function Carousel({
       </motion.div>
       <div className={`carousel-indicators-container ${round ? "round" : ""}`}>
         <div className="carousel-indicators">
-          {items.map((_, index) => (
-            <motion.div
-              key={index}
-              className={`carousel-indicator ${
-                currentIndex % items.length === index ? "active" : "inactive"
-              }`}
-              animate={{
-                scale: currentIndex % items.length === index ? 1.2 : 1,
-              }}
-              onClick={() => setCurrentIndex(index)}
-              transition={{ duration: 0.15 }}
-            />
-          ))}
+          {Array.from({ length: totalPages }).map((_, pageIndex) => {
+            // Determine if this indicator is active (currentIndex is within this page)
+            const start = pageIndex * visibleCount;
+            const end = start + visibleCount;
+            const isActive = currentIndex >= start && currentIndex < end;
+            return (
+              <motion.div
+                key={pageIndex}
+                className={`carousel-indicator ${isActive ? "active" : "inactive"}`}
+                animate={{
+                  scale: isActive ? 1.2 : 1,
+                }}
+                onClick={() => {
+                  // Clamp to lastGroupFirstIndex if clicking last indicator
+                  if (!loop && pageIndex === totalPages - 1) {
+                    setCurrentIndex(lastGroupFirstIndex);
+                  } else {
+                    setCurrentIndex(pageIndex * visibleCount);
+                  }
+                }}
+                transition={{ duration: 0.15 }}
+              />
+            );
+          })}
         </div>
       </div>
     </div>

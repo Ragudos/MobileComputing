@@ -86,11 +86,12 @@ function HomePage() {
                     <div style={{ height: 'auto', position: 'relative', display: 'flex', justifyContent: 'center' }}>
                         <Carousel
                             baseWidth={1000}
-                            autoplay={true}
+                            autoplay={false}
                             autoplayDelay={2000}
-                            pauseOnHover={true}
-                            loop={true}
+                            pauseOnHover={false}
+                            loop={false}
                             round={false}
+                            visibleCount={3}
                         />
                     </div>
                     <Button variant="primary" onClick={() => navigate('/auth/login')} className={homepageStyles.but}>Apply Now!</Button>
