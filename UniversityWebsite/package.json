@@ -5,6 +5,9 @@
   "engines": {
     "node": ">=20.0.0"
   },
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
     "format": "prettier --write **/src/**",
     "dev": "concurrently \"pnpm --filter ./packages/client run dev\" \"pnpm --filter ./packages/server run dev\" \"pnpm --filter ./packages/shared run dev\"",
