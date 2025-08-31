@@ -12,7 +12,7 @@
     "lint": "pnpm -r --filter ./packages/* run lint",
     "typecheck": "pnpm -r --filter ./packages/* run typecheck",
     "precommit": "pnpm -r --filter ./packages/* run precommit",
-    "prebuild": "[[ $CI = true ]] && npx pnpm@3 install -r --store=node_modules/.pnpm-store || echo skiping pnpm install"
+    "prebuild": "[[ $CI = true ]] && npx pnpm@10.11.0 install -r --store=node_modules/.pnpm-store || echo skiping pnpm install"
   },
   "license": "MIT",
   "packageManager": "pnpm@10.11.0",
