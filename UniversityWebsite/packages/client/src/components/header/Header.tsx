@@ -25,7 +25,10 @@ export function Header() {
         <header
             className={combineClassesOrNone("container", headerStyles.header)}
         >
+            <div className={headerStyles.logoContainer}>
             <Logo />
+            <h4 className={combineClassesOrNone("container", headerStyles.universityName)}>Sigma University</h4>
+            </div>
             <nav className={headerStyles.navigation}>
                 <ul className={headerStyles.navigationList}>
                     {NAVIGATION_LINKS.map((link) => (

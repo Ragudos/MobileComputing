@@ -1,2 +1,6 @@
 packages:
   - packages/*
+ignoredBuiltDependencies:
+  - unrs-resolver
+onlyBuiltDependencies:
+  - unrs-resolver
