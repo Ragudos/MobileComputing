@@ -14,13 +14,11 @@
     "build": "pnpm -r --filter ./packages/* run build",
     "lint": "pnpm -r --filter ./packages/* run lint",
     "typecheck": "pnpm -r --filter ./packages/* run typecheck",
-    "precommit": "pnpm -r --filter ./packages/* run precommit",
-    "prebuild": "[[ $CI = true ]] && npx pnpm@10.11.0 install -r --store=node_modules/.pnpm-store || echo skiping pnpm install"
+    "precommit": "pnpm -r --filter ./packages/* run precommit"
   },
   "license": "MIT",
   "packageManager": "pnpm@10.11.0",
   "devDependencies": {
-    "@types/node": "^24.3.0",
     "@typescript-eslint/eslint-plugin": "^8.41.0",
     "@typescript-eslint/parser": "^8.41.0",
     "concurrently": "^9.2.1",
