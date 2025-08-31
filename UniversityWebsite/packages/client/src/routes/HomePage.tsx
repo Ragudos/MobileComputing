@@ -4,8 +4,6 @@ import homepageStyles from "./homepage.module.css";
 import { combineClassesOrNone } from "@/lib/utils";
 import BlurText from '@/components/react-bits/BlurText';
 import { Button } from "@/components/ui/button/Button";
-import { UNIVERSITY_PROGRAMS } from "@university-website/shared";
-import { Footer } from "@/components/footer/Footer";
 import ClickSpark from "@/components/react-bits/ClickSpark";
 import Carousel from "@/components/react-bits/Carousel";
 
