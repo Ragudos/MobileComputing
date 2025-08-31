@@ -162,6 +162,7 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
             <canvas
                 ref={canvasRef}
                 style={{
+                   zIndex: 9999,
                    position:"absolute",
                    inset:0,
                    pointerEvents:"none"

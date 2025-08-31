@@ -25,6 +25,7 @@ export interface CarouselProps {
     pauseOnHover?: boolean;
     loop?: boolean;
     round?: boolean;
+    visibleCount?: number;
 }
 
 const DEFAULT_ITEMS: CarouselItem[] = [
@@ -129,7 +130,11 @@ const DEFAULT_ITEMS: CarouselItem[] = [
 const DRAG_BUFFER = 0;
 const VELOCITY_THRESHOLD = 500;
 const GAP = 16;
-const SPRING_OPTIONS = { type: "spring", stiffness: 300, damping: 30 };
+const SPRING_OPTIONS: Transition = {
+    type: "spring",
+    stiffness: 300,
+    damping: 30,
+};
 
 export default function Carousel({
     items = DEFAULT_ITEMS,
@@ -190,9 +195,7 @@ export default function Carousel({
         pauseOnHover,
     ]);
 
-    const effectiveTransition = isResetting
-        ? { duration: 0 }
-        : (SPRING_OPTIONS as Transition<any>);
+    const effectiveTransition = isResetting ? { duration: 0 } : SPRING_OPTIONS;
 
     const handleAnimationComplete = () => {
         if (loop && currentIndex === carouselItems.length - 1) {

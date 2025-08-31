@@ -133,11 +133,12 @@ function HomePage() {
                         >
                             <Carousel
                                 baseWidth={1000}
-                                autoplay={true}
+                                autoplay={false}
                                 autoplayDelay={2000}
-                                pauseOnHover={true}
-                                loop={true}
+                                pauseOnHover={false}
+                                loop={false}
                                 round={false}
+                                visibleCount={3}
                             />
                         </div>
                         <Button
