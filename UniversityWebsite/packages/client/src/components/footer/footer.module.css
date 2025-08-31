@@ -1,0 +1,80 @@
+.footer {
+  color: white;
+  background-color: rgb(32, 32, 32);
+  padding: 2rem 1rem;
+  font-family: "Inter", sans-serif;
+}
+
+.topSection {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2rem;
+  max-width: 1100px;
+  margin: 0 auto 2rem auto;
+}
+
+.branding {
+  flex: 1 1 250px;
+}
+
+.logo {
+  height: 80px;
+  width: auto;
+  margin-bottom: 0.75rem;
+  border-radius: 50px;
+}
+
+.tagline {
+  font-size: 0.95rem;
+  line-height: 1.4;
+  opacity: 0.9;
+}
+
+.contact {
+  flex: 1 1 200px;
+}
+
+.contact h4,
+.socials h4 {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.contact p {
+  margin: 0.25rem 0;
+  font-size: 0.95rem;
+}
+
+.socials {
+  flex: 1 1 200px;
+}
+
+.socialList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.socialList li {
+  margin-bottom: 0.4rem;
+}
+
+.socialList a {
+  color: #ffffff;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.socialList a:hover {
+  color: hsl(var(--clr-primary)); /* accent yellow/gold */
+}
+
+.bottomLine {
+  text-align: center;
+  font-size: 0.85rem;
+  opacity: 0.8;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding-top: 1rem;
+}

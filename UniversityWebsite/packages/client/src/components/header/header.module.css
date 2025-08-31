@@ -30,3 +30,9 @@
         --_text-opacity: 1;
     }
 }
+
+.logoContainer {
+    display: flex;
+    gap: var(--space-4);
+    color: hsl(var(--clr-primary) / var(--_text-opacity, 1));
+}
