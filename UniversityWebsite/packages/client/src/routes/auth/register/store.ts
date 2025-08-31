@@ -1,5 +1,6 @@
 import { YEAR_TODAY } from "@/lib/consts";
 import {
+    dateToString,
     emailValidator,
     Gender,
     MAX_FIRST_NAME,
@@ -7,6 +8,7 @@ import {
     MIN_YEAR_LEVEL,
     passwordValidator,
     UniversityProgram,
+    validateDateString,
 } from "@university-website/shared";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
@@ -147,7 +149,8 @@ export const useRegisterStore = create<RegisterState>()(
                     lastName.trim().length > 0 && lastName.trim().length <= 256;
                 const isDateOfBirthValid =
                     dateOfBirth instanceof Date &&
-                    !isNaN(dateOfBirth.getTime());
+                    !isNaN(dateOfBirth.getTime()) &&
+                    validateDateString(dateToString(dateOfBirth));
                 const isGenderValid = gender !== undefined && gender !== null;
 
                 set({
@@ -270,7 +273,7 @@ export const useRegisterStore = create<RegisterState>()(
             partialize: (state) =>
                 Object.fromEntries(
                     Object.entries(state).filter(([key]) => {
-                        return key !== "password";
+                        return key !== "password" && key !== "passwordError";
                     })
                 ),
             merge: (persisted, current) => {

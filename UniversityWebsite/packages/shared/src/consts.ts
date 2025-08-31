@@ -7,13 +7,20 @@ export type User = {
     lastName: string;
     dateOfBirth: Date;
     gender: Gender;
-    biography: string;
     universityProgram: UniversityProgram;
     yearLevel: number;
     graduationYear: number;
     role: UserRole;
+    isVerified: boolean;
 };
-export type RegisterPayload = User & {
+
+export type LoginPayload = {
+    email: string;
+    password: string;
+    honeypot: string;
+};
+
+export type RegisterPayload = Omit<User, "role" | "isVerified"> & {
     password: string;
     honeypot: string;
 };
@@ -22,6 +29,8 @@ export const GENDERS = ["male", "female", "non-binary", "other"] as const;
 export const USER_ROLES = ["student", "professor", "admin"] as const;
 export const MAX_YEAR_LEVEL = 6;
 export const MIN_YEAR_LEVEL = 1;
+export const MIN_FIRST_NAME = 1;
+export const MIN_LAST_NAME = 1;
 export const MAX_FIRST_NAME = 256;
 export const MAX_LAST_NAME = 256;
 export const UNIVERSITY_PROGRAMS = [
@@ -92,4 +101,34 @@ export const INVALID_VERIFICATION_TOKEN_REASONS = {
     NONEXISTENT: "Verification token does not exist. There might be a new one.",
     ALREADY_VERIFIED: "Verification token has already been verified",
     EXPIRED: "Verification token has expired",
+} as const;
+
+/**
+ * Pattern for validating date strings in the format YYYY-MM-DD.
+ */
+export const DATE_STRING_PATTERN =
+    /^(\d{4})\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/;
+
+export const MONTH_TO_DAYS: {
+    [key: string]: number;
+} = {
+    "01": 31,
+    "02": 28, // 29 in leap years
+    "03": 31,
+    "04": 30,
+    "05": 31,
+    "06": 30,
+    "07": 31,
+    "08": 31,
+    "09": 30,
+    "10": 31,
+    "11": 30,
+    "12": 31,
+} as const;
+
+export const TOTAL_MONTHS_IN_YEAR = 12;
+
+export const UNREASONABLE_BIRTH_YEAR = {
+    min: 1800,
+    max: new Date(Date.now()).getFullYear(),
 } as const;

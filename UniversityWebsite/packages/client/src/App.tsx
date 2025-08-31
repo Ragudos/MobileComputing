@@ -30,6 +30,12 @@ const ResendVerificationSuccessPage = lazy(
             "./routes/auth/resend_verification_success/ResendVerificationSuccessPage"
         )
 );
+const ProtectedLayout = lazy(
+    () => import("./routes/protected/ProtectedLayout")
+);
+const ProfilePage = lazy(
+    () => import("./routes/protected/profile/ProfilePage")
+);
 
 function App() {
     return (
@@ -38,7 +44,9 @@ function App() {
                 <Route
                     path="/"
                     element={
-                        <Suspense>
+                        <Suspense
+                            fallback={<LoadingSpinner message="Loading..." />}
+                        >
                             <Layout />
                         </Suspense>
                     }
@@ -67,11 +75,33 @@ function App() {
                             </Suspense>
                         }
                     />
+                    <Route
+                        element={
+                            <Suspense>
+                                <ProtectedLayout />
+                            </Suspense>
+                        }
+                    >
+                        <Route
+                            path="profile"
+                            element={
+                                <Suspense
+                                    fallback={
+                                        <LoadingSpinner message="Loading..." />
+                                    }
+                                >
+                                    <ProfilePage />
+                                </Suspense>
+                            }
+                        />
+                    </Route>
                 </Route>
                 <Route
                     path="/auth"
                     element={
-                        <Suspense>
+                        <Suspense
+                            fallback={<LoadingSpinner message="Loading..." />}
+                        >
                             <AuthLayout />
                         </Suspense>
                     }

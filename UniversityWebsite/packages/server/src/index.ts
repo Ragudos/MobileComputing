@@ -10,6 +10,7 @@ const app = express();
 const server = app.listen(PORT, onListen);
 const corsOptions: CorsOptions = {
     origin: CLIENT_URL,
+    credentials: true,
     optionsSuccessStatus: 200,
 };
 

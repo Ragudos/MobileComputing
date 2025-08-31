@@ -47,3 +47,7 @@ export function msToTextDuration(duration: number): string {
 
     return `${hours} hour/s ${minutes} minute/s ${seconds} second/s`;
 }
+
+export function dateToString(date: Date): string {
+    return date.toISOString().split("T")[0]!;
+}
