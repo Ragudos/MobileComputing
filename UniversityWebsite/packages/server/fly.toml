@@ -1,8 +1,0 @@
-
-app = "University Website"
-
-[env]
-    NODE_ENV = "production"
-
-[deploy]
-    release_command = "npm run migrate --workspace packages/server"

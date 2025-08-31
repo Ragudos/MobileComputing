@@ -5,6 +5,4 @@ status = 200
 to = "/"
 
 [build.environment]
-  NPM_FLAGS = "--version"
-  NETLIFY_USE_PNPM = "true"
-  PNPM_VERSION = "10.11.0" # or whatever you use
+    NPM_FLAGS="--prefix=/"

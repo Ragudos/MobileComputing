@@ -13,7 +13,7 @@
         "db:pull": "drizzle-kit pull --config ./drizzle.config.ts"
     },
     "dependencies": {
-        "@university-website/shared": "workspace:*",
+        "@university-website/shared": "file:../shared",
         "cookie-parser": "^1.4.7",
         "cors": "^2.8.5",
         "dotenv": "^17.2.1",
