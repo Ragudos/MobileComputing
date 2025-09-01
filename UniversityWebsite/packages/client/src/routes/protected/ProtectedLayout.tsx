@@ -1,13 +1,17 @@
 import { ROUTES } from "@/lib/consts";
 import { useAuth } from "@/lib/hooks";
-import { Navigate, Outlet } from "react-router";
+import { useEffect } from "react";
+import { Outlet, useNavigate } from "react-router";
 
 function ProtectedLayout() {
     const { user } = useAuth();
+    const navigate = useNavigate();
 
-    if (!user) {
-        return <Navigate to={ROUTES.AUTH.LOGIN} replace />;
-    }
+    useEffect(() => {
+        if (!user) {
+            navigate(ROUTES.AUTH.LOGIN);
+        }
+    }, [user]);
 
     return <Outlet />;
 }

@@ -1,5 +1,7 @@
+import { ROUTES } from "@/lib/consts";
 import { useAuth } from "@/lib/hooks";
 import { combineClassesOrNone } from "@/lib/utils";
+import { Link } from "react-router";
 import profileStyles from "./profile.module.css";
 
 function ProfilePage() {
@@ -53,10 +55,11 @@ function ProfilePage() {
                             <h1 className="h3">
                                 {user.firstName} {user.lastName}
                             </h1>
+
                             <span>{user.email}</span>
                         </div>
 
-                        <div className={profileStyles.metadataContainer}>
+                        <section className={profileStyles.metadataContainer}>
                             <ul>
                                 <li>Gender: {user.gender}</li>
                                 <li>Age: {age}</li>
@@ -78,6 +81,16 @@ function ProfilePage() {
                                 <li>Year level: {user.yearLevel}</li>
                                 <li>Graduation year: {user.graduationYear}</li>
                             </ul>
+                        </section>
+                        <div>
+                            {!user.isVerified && (
+                                <Link
+                                    className="link"
+                                    to={ROUTES.AUTH.RESEND_VERIFICATION}
+                                >
+                                    Resend Verification Email
+                                </Link>
+                            )}
                         </div>
                     </div>
                 </div>

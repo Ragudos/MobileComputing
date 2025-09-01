@@ -1,3 +1,7 @@
+.mainContent {
+    position: relative;
+}
+
 .mainContent section {
     padding-block: var(--space-12);
     padding-inline: var(--space-6);
@@ -192,7 +196,7 @@
 
 .programsContainer[data-animated="true"] {
     width: 100%;
-        height: 150px;
+    height: 150px;
     overflow: hidden;
     position: relative;
 
@@ -245,7 +249,6 @@
     }
 }
 
-
 .sneakpeekSection {
     .contentWrapper {
         display: flex;
@@ -280,7 +283,6 @@
 
             border: 1px dashed hsl(var(--clr-border) / 0.5);
         }
-
     }
 }
 
@@ -290,13 +292,60 @@
             flex-direction: row;
         }
         .contentContainer {
-        flex: 0.4;
+            flex: 0.4;
         }
         .sneakpeekImageContainer {
             flex: 0.6;
         }
     }
+}
 
+.testimonialsSection {
+    .contentWrapper {
+        display: flex;
+        flex-direction: column;
+
+        gap: var(--space-10);
+    }
+}
+
+.testimonialsList {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+
+    gap: var(--space-6);
+
+    li {
+        text-align: start;
+
+        padding: var(--space-8);
+        border-radius: var(--radius);
+
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-2);
+
+        height: 90%;
+
+        background-color: hsl(
+            var(--clr-secondary) / var(--_background-opacity, 1)
+        );
+        color: hsl(var(--clr-secondary-foreground) / var(--_text-opacity, 1));
+    }
+
+    li:nth-child(1),
+    li:nth-child(4) {
+        align-self: flex-start;
+    }
+
+    li:nth-child(2),
+    li:nth-child(5) {
+        align-self: center;
+    }
+
+    li:nth-child(3) {
+        align-self: flex-end;
+    }
 }
 
 @supports (animation-timeline: view()) {
@@ -318,7 +367,8 @@
             }
 
             .missionImageContainer {
-                opacity: 0; scale: 0.8;
+                opacity: 0;
+                scale: 0.8;
                 animation: pop-up 1s linear forwards;
                 animation-timeline: view();
                 animation-range: 250px 500px;
@@ -327,14 +377,16 @@
 
         .benefitsSection {
             .contentContainer {
-                opacity: 0; scale: 0.8;
+                opacity: 0;
+                scale: 0.8;
                 animation: pop-up 1s linear forwards;
                 animation-timeline: view();
                 animation-range: 250px 500px;
             }
 
             .benefitsList {
-                opacity: 0; scale: 0.8;
+                opacity: 0;
+                scale: 0.8;
                 animation: pop-up 1s linear forwards;
                 animation-timeline: view();
                 animation-range: 250px 500px;
@@ -353,7 +405,8 @@
 
         .sneakpeekSection {
             .sneakpeekImageContainer {
-                opacity: 0; scale: 0.8;
+                opacity: 0;
+                scale: 0.8;
                 animation: pop-up 1s linear forwards;
                 animation-timeline: view();
                 animation-range: 250px 500px;
@@ -364,6 +417,41 @@
                 animation: fade-in 1s linear forwards;
                 animation-timeline: view();
                 animation-range: 250px 500px;
+            }
+        }
+
+        .testimonialsSection {
+            .contentContainer {
+                opacity: 0;
+                animation: fade-in 1s linear forwards;
+                animation-timeline: view();
+                animation-range: 250px 500px;
+            }
+
+            .testimonialsList {
+                li {
+                    opacity: 0;
+                    scale: 0.8;
+                    animation: pop-up 1s linear forwards;
+                    animation-timeline: view();
+                    animation-range: 50px 100px;
+                }
+
+                li:nth-child(2) {
+                    animation-range: 100px 200px;
+                }
+
+                li:nth-child(3) {
+                    animation-range: 150px 250px;
+                }
+
+                li:nth-child(4) {
+                    animation-range: 200px 300px;
+                }
+
+                li:nth-child(5) {
+                    animation-range: 300px 400px;
+                }
             }
         }
     }
@@ -382,5 +470,8 @@
 }
 
 @keyframes pop-up {
-    to { opacity: 1; scale: 1; }
+    to {
+        opacity: 1;
+        scale: 1;
+    }
 }

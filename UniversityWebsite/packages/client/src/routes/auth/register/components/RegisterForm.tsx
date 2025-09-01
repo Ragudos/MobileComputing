@@ -114,6 +114,11 @@ function RegisterForm() {
                     className="visually-hidden"
                     name="honeypot"
                     id="honeypot"
+                    autoComplete="off"
+                    autoCorrect="off"
+                    autoCapitalize="off"
+                    spellCheck={false}
+                    aria-hidden="true"
                     value={honeypot}
                     onChange={(e) => setHoneypot(e.target.value)}
                 />

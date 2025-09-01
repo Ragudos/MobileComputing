@@ -115,6 +115,11 @@ function ResendVerificationPage() {
                                     type="text"
                                     className="visually-hidden"
                                     name="honeypot"
+                                    autoComplete="off"
+                                    autoCorrect="off"
+                                    autoCapitalize="off"
+                                    spellCheck={false}
+                                    aria-hidden="true"
                                     id="honeypot"
                                     value={honeypot}
                                     onChange={(e) =>

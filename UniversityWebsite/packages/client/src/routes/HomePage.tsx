@@ -187,13 +187,31 @@ function HomePage() {
                 aria-describedby="testimonials-desc"
                 className={homepageStyles.testimonialsSection}
             >
-                <div className={homepageStyles.contentContainer}>
-                    <h2 id="testimonials-title">
-                        {siteData.sections.testimonials.title}
-                    </h2>
-                    <p id="testimonials-desc">
-                        {siteData.sections.testimonials.subtitle}
-                    </p>
+                <div className={homepageStyles.contentWrapper}>
+                    <div className={homepageStyles.contentContainer}>
+                        <h2 id="testimonials-title">
+                            {siteData.sections.testimonials.title}
+                        </h2>
+                        <p id="testimonials-desc">
+                            {siteData.sections.testimonials.subtitle}
+                        </p>
+                    </div>
+
+                    <ul className={homepageStyles.testimonialsList}>
+                        {testimonials.map((testimonial, index) => {
+                            return (
+                                <li
+                                    key={index}
+                                    className={homepageStyles.testimonialItem}
+                                >
+                                    <small>{testimonial.author}</small>
+                                    <blockquote>
+                                        "{testimonial.quote}"
+                                    </blockquote>
+                                </li>
+                            );
+                        })}
+                    </ul>
                 </div>
             </section>
         </main>
