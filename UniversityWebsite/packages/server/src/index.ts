@@ -6,9 +6,7 @@ import rateLimit from "express-rate-limit";
 import morgan from "morgan";
 import indexRouter from "./routes";
 
-const app = express({
-    trustProxy: true,
-});
+const app = express();
 const server = app.listen(
     PORT,
     IS_DEVELOPMENT ? "127.0.0.1" : "0.0.0.0",
@@ -28,6 +26,7 @@ app.use(
         max: 100, // Limit each IP to 100 requests per windowMs
         message: "Too many requests, please try again later.",
         legacyHeaders: false,
+        standardHeaders: "draft-8",
     })
 );
 app.use(express.json());
