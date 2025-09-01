@@ -4,14 +4,18 @@ import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router";
 
 function ProtectedLayout() {
-    const { user } = useAuth();
+    const { user, isLoading } = useAuth();
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (!user) {
+        if (!user && !isLoading) {
             navigate(ROUTES.AUTH.LOGIN);
         }
-    }, [user]);
+    }, [user, isLoading]);
+
+    if (isLoading) {
+        return null;
+    }
 
     return <Outlet />;
 }

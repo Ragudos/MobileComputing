@@ -7,12 +7,12 @@ import { Outlet, useLocation, useNavigate } from "react-router";
 import authStyles from "./auth.module.css";
 
 function AuthLayout() {
-    const { user } = useAuth();
+    const { user, isLoading } = useAuth();
     const location = useLocation();
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (user) {
+        if (user && !isLoading) {
             if (
                 location.pathname !== ROUTES.AUTH.RESEND_VERIFICATION &&
                 location.pathname !== ROUTES.AUTH.RESEND_VERIFICATION_SUCCESS
@@ -20,7 +20,11 @@ function AuthLayout() {
                 navigate("/");
             }
         }
-    }, [user, navigate, location]);
+    }, [user, navigate, location, isLoading]);
+
+    if (isLoading) {
+        return null;
+    }
 
     return (
         <main className={authStyles.authContainer}>
