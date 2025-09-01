@@ -2,15 +2,8 @@
     padding-block: var(--space-12);
     padding-inline: var(--space-6);
 
-    display: grid;
-    place-items: center;
     text-align: center;
 
-    overflow: clip;
-
-    p {
-        max-width: max(70vw, 70ch);
-    }
 }
 
 .heroSection {
@@ -59,6 +52,10 @@
         flex-direction: column;
         align-items: center;
         gap: var(--space-6);
+
+        p {
+            max-width: 80ch;
+        }
     }
 }
 
@@ -171,6 +168,8 @@
         display: flex;
         flex-direction: column;
 
+        align-items: center;
+
         gap: var(--space-10);
     }
 }
@@ -189,7 +188,7 @@
 }
 
 .programsContainer[data-animated="true"] {
-    max-width: 800px;
+    width: min(100%, 800px);
     overflow: hidden;
 
     mask: linear-gradient(
@@ -216,11 +215,17 @@
             padding: var(--space-4) var(--space-6);
             border-radius: var(--radius);
 
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2);
+
             box-shadow:
                 0 1px 1px hsl(0 0% 0% / 0.75),
                 0 2px 2px hsl(0 0% 0% / 0.5),
                 0 4px 4px hsl(0 0% 0% / 0.5),
                 0 8px 8px hsl(0 0% 0% / 0.25);
+
+            max-width: 240px;
         }
     }
 }
