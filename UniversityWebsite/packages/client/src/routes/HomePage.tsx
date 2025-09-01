@@ -33,6 +33,12 @@ const testimonials = [
     },
 ];
 
+const sneakpeak = [
+    "Modern dormitories & eco-friendly campus",
+    "Sports facilities, gyms, and wellness programs",
+    "Cultural events, hackathons, and leadership summits",
+];
+
 const benefits = [
     "Cutting-edge curriculum designed with industry leaders",
     "State-of-the-art labs, libraries, and digital resources",
@@ -149,13 +155,29 @@ function HomePage() {
                 aria-describedby="sneakpeek-desc"
                 className={homepageStyles.sneakpeekSection}
             >
-                <div className={homepageStyles.contentContainer}>
-                    <h2 id="sneakpeek-title">
-                        {siteData.sections.sneakpeek.title}
-                    </h2>
-                    <p id="sneakpeek-desc">
-                        {siteData.sections.sneakpeek.subtitle}
-                    </p>
+                <div className={homepageStyles.contentWrapper}>
+                    <div className={homepageStyles.sneakpeekImageContainer}>
+                        <img
+                            src="/images/sneakpeek.webp"
+                            alt=""
+                            role="presentation"
+                        />
+                    </div>
+                    <div className={homepageStyles.contentContainer}>
+                        <div className={homepageStyles.content}>
+                            <h2 id="sneakpeek-title">
+                                {siteData.sections.sneakpeek.title}
+                            </h2>
+                            <p id="sneakpeek-desc">
+                                {siteData.sections.sneakpeek.subtitle}
+                            </p>
+                        </div>
+                        <ul className={homepageStyles.sneakpeekList}>
+                            {sneakpeak.map((item, index) => (
+                                <li key={index + item}>{item}</li>
+                            ))}
+                        </ul>
+                    </div>
                 </div>
             </section>
 
