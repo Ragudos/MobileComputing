@@ -333,7 +333,12 @@ export async function postRegisterRoute(
 }
 
 export async function deleteLogoutRoute(_: Request, res: Response) {
-    res.clearCookie(AUTH_COOKIE_NAME);
+    res.cookie(AUTH_COOKIE_NAME, "", {
+        expires: new Date(0),
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+    });
 
     res.status(200);
     res.end();

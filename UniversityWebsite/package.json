@@ -15,7 +15,7 @@
     "lint": "pnpm -r --filter ./packages/* run lint",
     "typecheck": "pnpm -r --filter ./packages/* run typecheck",
     "precommit": "pnpm -r --filter ./packages/* run precommit",
-    "start": "pnpm --filter ./packages/server run start"
+    "start": "pnpm --filter=server run start"
   },
   "license": "MIT",
   "packageManager": "pnpm@10.11.0",
