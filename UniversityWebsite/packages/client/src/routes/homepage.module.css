@@ -32,7 +32,7 @@
     }
 
     &::before {
-        background-image: url("/images/heroBackground.png");
+        background-image: url("/images/heroBackground.webp");
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
@@ -55,5 +55,40 @@
         flex-direction: column;
         align-items: center;
         gap: var(--space-6);
+    }
+}
+
+.missionSection {
+    .contentContainer {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: var(--space-6);
+    }
+}
+
+.missionContent {
+}
+
+.missionImageContainer {
+    img {
+        border-radius: var(--radius);
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .missionSection {
+        .contentContainer {
+            flex-direction: row;
+        }
+    }
+
+    .missionContent {
+        flex: 0.4;
+        flex-shrink: 0;
+    }
+
+    .missionImageContainer {
+        flex: 0.6;
     }
 }

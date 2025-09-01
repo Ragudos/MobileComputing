@@ -7,7 +7,11 @@ import morgan from "morgan";
 import indexRouter from "./routes";
 
 const app = express();
-const server = app.listen(PORT, onListen);
+const server = app.listen(
+    PORT,
+    IS_DEVELOPMENT ? "127.0.0.1" : "0.0.0.0",
+    onListen
+);
 const corsOptions: CorsOptions = {
     origin: CLIENT_URL,
     credentials: true,

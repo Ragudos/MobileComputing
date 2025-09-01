@@ -10,7 +10,8 @@
         "lint": "eslint 'src/**/*.{ts,js}'",
         "typecheck": "tsc -p tsconfig.json --noEmit",
         "db:push": "drizzle-kit push --config ./drizzle.config.ts",
-        "db:pull": "drizzle-kit pull --config ./drizzle.config.ts"
+        "db:pull": "drizzle-kit pull --config ./drizzle.config.ts",
+        "prepack": "node scripts/convert-workspaces.js"
     },
     "dependencies": {
         "@university-website/shared": "workspace:*",

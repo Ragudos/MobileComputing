@@ -1,7 +1,7 @@
 import "dotenv/config";
 
 const IS_DEVELOPMENT = process.env.NODE_ENV !== "production";
-const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
+const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 8080;
 
 const JWT_SECRET = process.env.JWT_SECRET as string;
 const DATABASE_URL = process.env.DATABASE_URL as string;
@@ -62,3 +62,4 @@ export {
     PORT,
     SITE_URL,
 };
+

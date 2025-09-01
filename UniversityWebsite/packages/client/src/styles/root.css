@@ -23,15 +23,15 @@
     --radius-half: calc(var(--radius) / 2);
     --radius-quarter: calc(var(--radius) / 4);
 
-    --fs-h1: 5.61rem;
-    --fs-h2: 4.209rem;
-    --fs-h3: 3.157rem;
-    --fs-h4: 2.369rem;
-    --fs-h5: 1.777rem;
-    --fs-h6: 1.333rem;
+    --fs-h1: 2.986rem;
+    --fs-h2: 2.488rem;
+    --fs-h3: 2.074rem;
+    --fs-h4: 1.728rem;
+    --fs-h5: 1.44rem;
+    --fs-h6: 1.2rem;
     --fs-p: 1rem;
-    --fs-sm: 0.75rem;
-    --fs-xs: 0.563rem;
+    --fs-sm: 0.833rem;
+    --fs-xs: 0.694rem;
 
     --space-0: 0.25rem;
     --space-1: 0.333rem;
@@ -56,4 +56,32 @@
     --max-content-width: 1400px;
     --padding-inline: 1rem;
     --max-card-width: 425px;
+}
+
+@media screen and (min-width: 800px) {
+    :root {
+        --fs-h1: 3.815rem;
+        --fs-h2: 3.052rem;
+        --fs-h3: 2.441rem;
+        --fs-h4: 1.953rem;
+        --fs-h5: 1.563rem;
+        --fs-h6: 1.25rem;
+        --fs-p: 1rem;
+        --fs-sm: 0.8rem;
+        --fs-xs: 0.64rem;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    :root {
+        --fs-h1: 5.61rem;
+        --fs-h2: 4.209rem;
+        --fs-h3: 3.157rem;
+        --fs-h4: 2.369rem;
+        --fs-h5: 1.777rem;
+        --fs-h6: 1.333rem;
+        --fs-p: 1rem;
+        --fs-sm: 0.75rem;
+        --fs-xs: 0.563rem;
+    }
 }

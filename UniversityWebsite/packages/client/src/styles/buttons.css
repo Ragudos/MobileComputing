@@ -30,23 +30,23 @@ input[type="reset"] {
     padding: var(--space-2) var(--space-4);
 }
 
-button.primary input[type="submit"].primary input[type="reset"].primary,
-a.primary
-    button.secondary
-    input[type="submit"].secondary
-    input[type="reset"].secondary
+button.primary, input[type="submit"].primary, input[type="reset"].primary,
+a.primary,
+    button.secondary,
+    input[type="submit"].secondary,
+    input[type="reset"].secondary,
     a.secondary,
-button.destructive
-    input[type="submit"].destructive
-    input[type="reset"].destructive
+    button.destructive,
+    input[type="submit"].destructive,
+    input[type="reset"].destructive,
     a.destructive,
 button.success,
 input[type="submit"].success,
 input[type="reset"].success,
 a.success,
-button.default
-    input[type="submit"].default
-    input[type="reset"].default
+button.default,
+    input[type="submit"].default,
+    input[type="reset"].default,
     a.default {
     &:hover {
         --_background-opacity: 1;
@@ -56,7 +56,9 @@ button.default
     }
 }
 
-button.primary input[type="submit"].primary input[type="reset"].primary,
+button.primary,
+input[type="submit"].primary,
+input[type="reset"].primary,
 a.primary {
     background-color: hsl(
         var(--clr-primary) / var(--_background-opacity, 0.67)
@@ -64,10 +66,10 @@ a.primary {
     color: hsl(var(--clr-primary-foreground) / var(--_text-opacity, 1));
 }
 
-button.secondary
-    input[type="submit"].secondary
-    input[type="reset"].secondary
-    a.secondary {
+button.secondary,
+input[type="submit"].secondary,
+input[type="reset"].secondary,
+a.secondary {
     background-color: hsl(
         var(--clr-secondary) / var(--_background-opacity, 0.67)
     );
@@ -171,5 +173,16 @@ a.cta {
             0 16px 16px 8px hsl(var(--clr-primary) / 0.125);
 
         transform: translateY(-2px);
+    }
+}
+
+button,
+input[type="submit"],
+input[type="reset"] {
+    &:disabled {
+        --_background-opacity: 1 !important;
+        opacity: 0.5;
+        cursor: pointer;
+        pointer-events: none;
     }
 }

@@ -35,6 +35,7 @@ function HomePage() {
             )}
         >
             <section
+                id="hero"
                 aria-labelledby="hero-title"
                 aria-describedby="hero-desc"
                 className={homepageStyles.heroSection}
@@ -59,21 +60,33 @@ function HomePage() {
             </section>
 
             <section
+                id="mission"
                 aria-labelledby="mission-title"
                 aria-describedby="mission-desc"
                 className={homepageStyles.missionSection}
             >
                 <div className={homepageStyles.contentContainer}>
-                    <h2 id="mission-title">
-                        {siteData.sections.mission.title}
-                    </h2>
-                    <p id="mission-desc">
-                        {siteData.sections.mission.subtitle}
-                    </p>
+                    <div className={homepageStyles.missionContent}>
+                        <h2 id="mission-title">
+                            {siteData.sections.mission.title}
+                        </h2>
+                        <p id="mission-desc">
+                            {siteData.sections.mission.subtitle}
+                        </p>
+                    </div>
+
+                    <div className={homepageStyles.missionImageContainer}>
+                        <img
+                            src="/images/mission.webp"
+                            alt=""
+                            role="presentation"
+                        />
+                    </div>
                 </div>
             </section>
 
             <section
+                id="benefits"
                 aria-labelledby="benefits-title"
                 aria-describedby="benefits-desc"
                 className={homepageStyles.benefitsSection}
@@ -89,6 +102,7 @@ function HomePage() {
             </section>
 
             <section
+                id="programs"
                 aria-labelledby="programs-title"
                 aria-describedby="programs-desc"
                 className={homepageStyles.programsSection}
@@ -104,6 +118,7 @@ function HomePage() {
             </section>
 
             <section
+                id="sneakpeek"
                 aria-labelledby="sneakpeek-title"
                 aria-describedby="sneakpeek-desc"
                 className={homepageStyles.sneakpeekSection}
@@ -119,6 +134,7 @@ function HomePage() {
             </section>
 
             <section
+                id="testimonials"
                 aria-labelledby="testimonials-title"
                 aria-describedby="testimonials-desc"
                 className={homepageStyles.testimonialsSection}
