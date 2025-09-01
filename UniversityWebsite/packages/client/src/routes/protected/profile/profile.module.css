@@ -72,13 +72,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--space-8);
+    gap: var(--space-6);
 
     text-align: center;
 
     ul {
         width: 100%;
-        list-style-type: circle;
 
         padding-left: var(--space-4);
     }
