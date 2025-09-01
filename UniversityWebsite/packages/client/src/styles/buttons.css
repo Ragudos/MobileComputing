@@ -160,7 +160,16 @@ a.cta {
     background-color: hsl(var(--clr-primary) / var(--_background-opacity, 1));
     color: hsl(var(--clr-primary-foreground) / var(--_text-opacity, 1));
 
+    will-change: box-shadow, transform;
+    transition:
+        box-shadow 0.2s,
+        transform 0.2s;
+
     &:hover {
-        box-shadow: 0 4px 20px hsl(var(--clr-primary) / 0.25);
+        box-shadow:
+            0 8px 8px 4px hsl(var(--clr-primary) / 0.25),
+            0 16px 16px 8px hsl(var(--clr-primary) / 0.125);
+
+        transform: translateY(-2px);
     }
 }
