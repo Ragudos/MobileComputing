@@ -3,12 +3,14 @@
     padding-inline: var(--space-6);
 
     text-align: center;
-
 }
 
 .heroSection {
     --_radius: var(--radius);
     min-height: 80dvh;
+
+    display: grid;
+    place-items: center;
 
     position: relative;
 
@@ -249,18 +251,14 @@
         .missionSection {
             .missionContent {
                 opacity: 0;
-                transform: translateX(-100%);
-
-                animation: slide-right 1s linear forwards;
+                animation: fade-in 1s linear forwards;
                 animation-timeline: view();
                 animation-range: 250px 500px;
             }
 
             .missionImageContainer {
                 opacity: 0;
-                transform: translateX(100%);
-
-                animation: slide-left 1s linear forwards;
+                animation: fade-in 1s linear forwards;
                 animation-timeline: view();
                 animation-range: 250px 500px;
             }
@@ -269,18 +267,23 @@
         .benefitsSection {
             .contentContainer {
                 opacity: 0;
-                transform: scale(0);
-
-                animation: pop-up 1s linear forwards;
+                animation: fade-in 1s linear forwards;
                 animation-timeline: view();
                 animation-range: 250px 500px;
             }
 
             .benefitsList {
                 opacity: 0;
-                transform: translateY(100%);
+                animation: fade-in 1s linear forwards;
+                animation-timeline: view();
+                animation-range: 250px 500px;
+            }
+        }
 
-                animation: slide-up 1s linear forwards;
+        .programsSection {
+            .contentWrapper {
+                opacity: 0;
+                animation: fade-in 1s linear forwards;
                 animation-timeline: view();
                 animation-range: 250px 500px;
             }
@@ -297,49 +300,5 @@
 @keyframes fade-out {
     100% {
         opacity: 0;
-    }
-}
-
-@keyframes pop-up {
-    0% {
-        transform: scale(0);
-        opacity: 0;
-    }
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
-@keyframes slide-left {
-    0% {
-        transform: translateX(100%);
-        opacity: 0;
-    }
-    100% {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
-@keyframes slide-right {
-    0% {
-        transform: translateX(-100%);
-        opacity: 0;
-    }
-    100% {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
-@keyframes slide-up {
-    0% {
-        transform: translateY(100%);
-        opacity: 0;
-    }
-    100% {
-        transform: translateY(0);
-        opacity: 1;
     }
 }
