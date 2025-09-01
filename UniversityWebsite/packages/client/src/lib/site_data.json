@@ -1,0 +1,28 @@
+{
+    "sections": {
+        "hero": {
+            "title": "Sigma University",
+            "subtitle": "On our campus, world-class faculty and talented students come together to create a better world through groundbreaking research, cutting-edge innovations, and transformative scholarly work."
+        },
+        "mission": {
+            "title": "Make the Impossible Possible",
+            "subtitle": "At Sigma, our mission of discovery and learning is energized by a spirit of optimism and possibility that dates to our founding. Here you’ll find a place of intellectual expansiveness, wide-ranging perspectives, and freedom to explore new lines of thinking. Buzzing with ideas and innovation, approaching questions with openness and curiosity, pursuing excellence in all we do– this is Sigma."
+        },
+        "benefits": {
+            "title": "The Sigma Advantage",
+            "subtitle": "Be a sigma boy or girl."
+        },
+        "programs": {
+            "title": "Explore Our Programs",
+            "subtitle": " Our academic offerings are designed to balance theory, practice, and innovation."
+        },
+        "sneakpeek": {
+            "title": "Life at Sigma",
+            "subtitle": " Sigma University is more than just classrooms and exams—it’s a hub of creativity, collaboration, and personal growth."
+        },
+        "testimonials": {
+            "title": "What Our Students Say",
+            "subtitle": "Hear from our students about their experiences at Sigma University."
+        }
+    }
+}

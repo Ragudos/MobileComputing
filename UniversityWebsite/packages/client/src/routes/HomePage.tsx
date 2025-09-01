@@ -1,16 +1,7 @@
-import BlurText from "@/components/react-bits/BlurText";
-import Carousel from "@/components/react-bits/Carousel";
-import ClickSpark from "@/components/react-bits/ClickSpark";
-import { Button } from "@/components/ui/button/Button";
+import siteData from "@/lib/site_data.json";
 import { combineClassesOrNone } from "@/lib/utils";
-import React from "react";
-import { useNavigate } from "react-router";
+import { Link } from "react-router";
 import homepageStyles from "./homepage.module.css";
-
-
-const handleAnimationComplete = () => {
-    console.log("Animation completed!");
-};
 
 const testimonials = [
     {
@@ -36,282 +27,112 @@ const testimonials = [
 ];
 
 function HomePage() {
-    const navigate = useNavigate();
-
-    const [testimonialIndex, setTestimonialIndex] = React.useState(0);
-    const handlePrev = () =>
-        setTestimonialIndex(
-            (prev) => (prev - 1 + testimonials.length) % testimonials.length
-        );
-    const handleNext = () =>
-        setTestimonialIndex((prev) => (prev + 1) % testimonials.length);
     return (
-        <>
-            <ClickSpark
-                sparkColor="#44bf98"
-                sparkSize={10}
-                sparkRadius={15}
-                sparkCount={8}
-                duration={400}
+        <main
+            className={combineClassesOrNone(
+                "container",
+                homepageStyles.mainContent
+            )}
+        >
+            <section
+                aria-labelledby="hero-title"
+                aria-describedby="hero-desc"
+                className={homepageStyles.heroSection}
             >
-                <main className={combineClassesOrNone("container")}>
-                    <section className={homepageStyles.heroBackground}>
-                        <BlurText
-                            text="Welcome to Sigma"
-                            delay={150}
-                            animateBy="words"
-                            direction="top"
-                            onAnimationComplete={handleAnimationComplete}
-                            className={combineClassesOrNone(
-                                "h1",
-                                homepageStyles.blurText
-                            )}
-                        />
-                        <BlurText
-                            text="On our campus, world-class faculty and talented students come together to create a better world through groundbreaking research, cutting-edge innovations, and transformative scholarly work."
-                            delay={0}
-                            animateBy="words"
-                            direction="top"
-                            onAnimationComplete={handleAnimationComplete}
-                            className={combineClassesOrNone(
-                                "p",
-                                homepageStyles.paraText
-                            )}
-                        />
-                        <Button
-                            variant="primary"
-                            onClick={() => navigate("/auth/login")}
-                        >
-                            Apply Now!
-                        </Button>
-                    </section>
+                <div className={homepageStyles.contentContainer}>
+                    <div>
+                        <h1 className="brandingFont" id="hero-title">
+                            {siteData.sections.hero.title}
+                        </h1>
+                        <p id="hero-desc">{siteData.sections.hero.subtitle}</p>
+                    </div>
+                    <Link
+                        to="/auth/login"
+                        className={combineClassesOrNone(
+                            "cta",
+                            homepageStyles.applyButton
+                        )}
+                    >
+                        Apply Now!
+                    </Link>
+                </div>
+            </section>
 
-                    <section className={homepageStyles.missionSection}>
-                        <div className={homepageStyles.row1}>
-                            <h4>A Mission Defined by Possibility</h4>
-                            <p className={homepageStyles.paraSec2}>
-                                At Sigma, our mission of discovery and learning
-                                is energized by a spirit of optimism and
-                                possibility that dates to our founding. Here
-                                you’ll find a place of intellectual
-                                expansiveness, wide-ranging perspectives, and
-                                freedom to explore new lines of thinking.
-                                Buzzing with ideas and innovation, approaching
-                                questions with openness and curiosity, pursuing
-                                excellence in all we do – this is Sigma.
-                            </p>
-                            <Button
-                                variant="primary"
-                                onClick={() => navigate("/about")}
-                                className={homepageStyles.but}
-                            >
-                                More about Sigma
-                            </Button>
-                        </div>
-                        <div className={homepageStyles.imageContainer}>
-                            <img
-                                src="/sec2pic.jpg"
-                                className={homepageStyles.section2Image}
-                            ></img>
-                        </div>
-                    </section>
-                    <section className={homepageStyles.bentoSection}>
-                        <h3 className={homepageStyles.bentoTitle}>
-                            Explore Our Programs
-                        </h3>
-                        <p className={homepageStyles.bentoSubtitle}>
-                            Our academic offerings are designed to balance
-                            theory, practice, and innovation.
-                        </p>
+            <section
+                aria-labelledby="mission-title"
+                aria-describedby="mission-desc"
+                className={homepageStyles.missionSection}
+            >
+                <div className={homepageStyles.contentContainer}>
+                    <h2 id="mission-title">
+                        {siteData.sections.mission.title}
+                    </h2>
+                    <p id="mission-desc">
+                        {siteData.sections.mission.subtitle}
+                    </p>
+                </div>
+            </section>
 
-                        <div
-                            style={{
-                                height: "auto",
-                                position: "relative",
-                                display: "flex",
-                                justifyContent: "center",
-                            }}
-                        >
-                            <Carousel
-                                baseWidth={1000}
-                                autoplay={false}
-                                autoplayDelay={2000}
-                                pauseOnHover={false}
-                                loop={false}
-                                round={false}
-                                visibleCount={3}
-                            />
-                        </div>
-                        <Button
-                            variant="primary"
-                            onClick={() => navigate("/auth/login")}
-                            className={homepageStyles.but}
-                        >
-                            Apply Now!
-                        </Button>
-                    </section>
-                    <section className={homepageStyles.advantageSection}>
-                        <h3 className={homepageStyles.advantageTitle}>
-                            The Sigma Advantage
-                        </h3>
-                        <ul className={homepageStyles.advantageList}>
-                            <li className={homepageStyles.advantageItem}>
-                                Cutting-edge curriculum designed with industry
-                                leaders
-                            </li>
-                            <li className={homepageStyles.advantageItem}>
-                                State-of-the-art labs, libraries, and digital
-                                resources
-                            </li>
-                            <li className={homepageStyles.advantageItem}>
-                                Experienced faculty and global partnerships
-                            </li>
-                            <li className={homepageStyles.advantageItem}>
-                                Strong focus on leadership, ethics, and
-                                innovation
-                            </li>
-                            <li className={homepageStyles.advantageItem}>
-                                A vibrant student community with 50+ clubs and
-                                organizations
-                            </li>
-                        </ul>
-                        <Button
-                            variant="primary"
-                            onClick={() => navigate("/auth/login")}
-                            className={homepageStyles.but}
-                        >
-                            Apply Now!
-                        </Button>
-                    </section>
-                    <section className={homepageStyles.lifeSection}>
-                        <div className={homepageStyles.lifeImageRow}>
-                            <img
-                                src="/sec5img.jpg"
-                                alt="Life at Sigma"
-                                className={homepageStyles.lifeImage}
-                            />
-                        </div>
-                        <div className={homepageStyles.lifeTextRow}>
-                            <h3>Life at Sigma</h3>
-                            <p>
-                                Sigma University is more than just classrooms
-                                and exams—it’s a hub of creativity,
-                                collaboration, and personal growth.
-                            </p>
-                            <ul className={homepageStyles.lifeList}>
-                                <li>
-                                    Modern dormitories & eco-friendly campus
-                                </li>
-                                <li>
-                                    Sports facilities, gyms, and wellness
-                                    programs
-                                </li>
-                                <li>
-                                    Cultural events, hackathons, and leadership
-                                    summits
-                                </li>
-                            </ul>
-                            <Button
-                                variant="primary"
-                                onClick={() => navigate("/auth/login")}
-                            >
-                                Apply Now!
-                            </Button>
-                        </div>
-                    </section>
-                    <section className={homepageStyles.testimonialSection}>
-                        <h3 className={homepageStyles.testimonialTitle}>
-                            Hear From Our Students
-                        </h3>
-                        <div className={homepageStyles.testimonialCarousel}>
-                            <button
-                                aria-label="Previous testimonial"
-                                onClick={handlePrev}
-                                className={homepageStyles.testimonialNavBtn}
-                                type="button"
-                            >
-                                &#8592;
-                            </button>
-                            <div className={homepageStyles.testimonialCard}>
-                                {testimonials[testimonialIndex] ? (
-                                    <>
-                                        <p
-                                            className={
-                                                homepageStyles.testimonialQuote
-                                            }
-                                        >
-                                            “
-                                            {
-                                                testimonials[testimonialIndex]
-                                                    .quote
-                                            }
-                                            ”
-                                        </p>
-                                        <span
-                                            className={
-                                                homepageStyles.testimonialAuthor
-                                            }
-                                        >
-                                            {
-                                                testimonials[testimonialIndex]
-                                                    .author
-                                            }
-                                        </span>
-                                    </>
-                                ) : null}
-                            </div>
-                            <button
-                                aria-label="Next testimonial"
-                                onClick={handleNext}
-                                className={homepageStyles.testimonialNavBtn}
-                                type="button"
-                            >
-                                &#8594;
-                            </button>
-                        </div>
-                        <div
-                            style={{
-                                marginTop: 12,
-                                display: "flex",
-                                gap: 6,
-                                justifyContent: "center",
-                            }}
-                        >
-                            {testimonials.map((_, idx) => (
-                                <span
-                                    key={idx}
-                                    style={{
-                                        display: "inline-block",
-                                        width: 10,
-                                        height: 10,
-                                        borderRadius: "50%",
-                                        background:
-                                            idx === testimonialIndex
-                                                ? "var(--brand-color, #0057B8)"
-                                                : "#cce0f6",
-                                        transition: "background 0.2s",
-                                    }}
-                                />
-                            ))}
-                        </div>
-                    </section>
-                    <section className={homepageStyles.journeySection}>
-                        <h3>Ready to Begin Your Journey?</h3>
-                        <p>
-                            Join a community of thinkers, innovators, and
-                            leaders at Sigma University.
-                        </p>
-                        <Button
-                            variant="default"
-                            className={homepageStyles.but}
-                            onClick={() => navigate("/auth/login")}
-                        >
-                            Start Your Application
-                        </Button>
-                    </section>
-                </main>
-            </ClickSpark>
-        </>
+            <section
+                aria-labelledby="benefits-title"
+                aria-describedby="benefits-desc"
+                className={homepageStyles.benefitsSection}
+            >
+                <div className={homepageStyles.contentContainer}>
+                    <h2 id="benefits-title">
+                        {siteData.sections.benefits.title}
+                    </h2>
+                    <p id="benefits-desc">
+                        {siteData.sections.benefits.subtitle}
+                    </p>
+                </div>
+            </section>
+
+            <section
+                aria-labelledby="programs-title"
+                aria-describedby="programs-desc"
+                className={homepageStyles.programsSection}
+            >
+                <div className={homepageStyles.contentContainer}>
+                    <h2 id="programs-title">
+                        {siteData.sections.programs.title}
+                    </h2>
+                    <p id="programs-desc">
+                        {siteData.sections.programs.subtitle}
+                    </p>
+                </div>
+            </section>
+
+            <section
+                aria-labelledby="sneakpeek-title"
+                aria-describedby="sneakpeek-desc"
+                className={homepageStyles.sneakpeekSection}
+            >
+                <div className={homepageStyles.contentContainer}>
+                    <h2 id="sneakpeek-title">
+                        {siteData.sections.sneakpeek.title}
+                    </h2>
+                    <p id="sneakpeek-desc">
+                        {siteData.sections.sneakpeek.subtitle}
+                    </p>
+                </div>
+            </section>
+
+            <section
+                aria-labelledby="testimonials-title"
+                aria-describedby="testimonials-desc"
+                className={homepageStyles.testimonialsSection}
+            >
+                <div className={homepageStyles.contentContainer}>
+                    <h2 id="testimonials-title">
+                        {siteData.sections.testimonials.title}
+                    </h2>
+                    <p id="testimonials-desc">
+                        {siteData.sections.testimonials.subtitle}
+                    </p>
+                </div>
+            </section>
+        </main>
     );
 }
 

@@ -8,7 +8,8 @@
         "build": "tsc -p tsconfig.json && vite build",
         "preview": "vite preview",
         "lint": "eslint . --ext .js,.ts,.jsx,.tsx --fix",
-        "typecheck": "tsc -p tsconfig.json --noEmit"
+        "typecheck": "tsc -p tsconfig.json --noEmit",
+        "prepack": "npm pkg fix-workspaces"
     },
     "dependencies": {
         "@motionone/react": "^10.16.4",

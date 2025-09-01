@@ -1,11 +1,12 @@
-.button {
+button,
+input[type="submit"],
+input[type="reset"],
+a {
     display: inline-flex;
     align-items: center;
     justify-content: center;
 
     border-radius: var(--radius-half);
-
-    padding: var(--space-2) var(--space-4);
 
     will-change: transform, background-color, color, border-color, box-shadow;
     transition:
@@ -14,6 +15,8 @@
         border-color 0.2s,
         box-shadow 0.2s;
 
+    font-weight: 600;
+
     &:focus-visible {
         box-shadow:
             0 0 0 1px hsl(var(--clr-background)),
@@ -21,11 +24,30 @@
     }
 }
 
-.button.primary,
-.button.secondary,
-.button.destructive,
-.button.success,
-.button.default {
+button,
+input[type="submit"],
+input[type="reset"] {
+    padding: var(--space-2) var(--space-4);
+}
+
+button.primary input[type="submit"].primary input[type="reset"].primary,
+a.primary
+    button.secondary
+    input[type="submit"].secondary
+    input[type="reset"].secondary
+    a.secondary,
+button.destructive
+    input[type="submit"].destructive
+    input[type="reset"].destructive
+    a.destructive,
+button.success,
+input[type="submit"].success,
+input[type="reset"].success,
+a.success,
+button.default
+    input[type="submit"].default
+    input[type="reset"].default
+    a.default {
     &:hover {
         --_background-opacity: 1;
     }
@@ -34,21 +56,28 @@
     }
 }
 
-.button.primary {
+button.primary input[type="submit"].primary input[type="reset"].primary,
+a.primary {
     background-color: hsl(
         var(--clr-primary) / var(--_background-opacity, 0.67)
     );
     color: hsl(var(--clr-primary-foreground) / var(--_text-opacity, 1));
 }
 
-.button.secondary {
+button.secondary
+    input[type="submit"].secondary
+    input[type="reset"].secondary
+    a.secondary {
     background-color: hsl(
         var(--clr-secondary) / var(--_background-opacity, 0.67)
     );
     color: hsl(var(--clr-secondary-foreground) / var(--_text-opacity, 1));
 }
 
-.button.ghost {
+button.ghost,
+input[type="submit"].ghost,
+input[type="reset"].ghost,
+a.ghost {
     background-color: transparent;
     color: hsl(var(--clr-foreground) / var(--_text-opacity, 1));
 
@@ -63,22 +92,30 @@
         --_background-opacity: 0.125;
     }
 }
-
-.button.destructive {
+button.destructive,
+input[type="submit"].destructive,
+input[type="reset"].destructive,
+a.destructive {
     background-color: hsl(
         var(--clr-destructive) / var(--_background-opacity, 0.67)
     );
     color: hsl(var(--clr-destructive-foreground) / var(--_text-opacity, 1));
 }
 
-.button.success {
+button.success,
+input[type="submit"].success,
+input[type="reset"].success,
+a.success {
     background-color: hsl(
         var(--clr-success) / var(--_background-opacity, 0.67)
     );
     color: hsl(var(--clr-success-foreground) / var(--_text-opacity, 1));
 }
 
-.button.outline {
+button.outline,
+input[type="submit"].outline,
+input[type="reset"].outline,
+a.outline {
     background-color: transparent;
     color: hsl(var(--clr-foreground) / var(--_text-opacity, 1));
     border: 1px solid hsl(var(--clr-border) / var(--_border-opacity, 1));
@@ -95,15 +132,35 @@
     }
 }
 
-.button.default {
+button.default,
+input[type="submit"].default,
+input[type="reset"].default,
+a.default {
     background-color: hsl(
         var(--clr-foreground) / var(--_background-opacity, 0.67)
     );
     color: hsl(var(--clr-background) / var(--_text-opacity, 1));
 }
 
-.button.icon {
+button.icon,
+input[type="submit"].icon,
+input[type="reset"].icon,
+a.icon {
     width: 32px;
     height: 32px;
     padding: 0.25rem;
+}
+
+button.cta,
+input[type="submit"].cta,
+input[type="reset"].cta,
+a.cta {
+    padding: var(--space-3) var(--space-6);
+
+    background-color: hsl(var(--clr-primary) / var(--_background-opacity, 1));
+    color: hsl(var(--clr-primary-foreground) / var(--_text-opacity, 1));
+
+    &:hover {
+        box-shadow: 0 4px 20px hsl(var(--clr-primary) / 0.25);
+    }
 }

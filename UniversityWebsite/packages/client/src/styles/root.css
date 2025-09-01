@@ -1,0 +1,59 @@
+:root {
+    --clr-background: 168 33% 97%;
+    --clr-foreground: 180 6% 7%;
+    --clr-card: 168 33% 97%;
+    --clr-card-foreground: 180 6% 7%;
+    --clr-popover: 168 33% 97%;
+    --clr-popover-foreground: 180 6% 7%;
+    --clr-primary: 161 49% 51%;
+    --clr-primary-foreground: 180 6% 7%;
+    --clr-secondary: 161 69% 72%;
+    --clr-secondary-foreground: 180 6% 7%;
+    --clr-muted: 168 33% 20%;
+    --clr-muted-foreground: 180 6% 70%;
+    --clr-accent: 161 90% 62%;
+    --clr-accent-foreground: 180 6% 7%;
+    --clr-destructive: 0 85% 60%;
+    --clr-destructive-foreground: 180 6% 7%;
+    --clr-border: 168 33% 20%;
+    --clr-input: 168 33% 20%;
+    --clr-ring: 161 90% 40%;
+
+    --radius: 0.5rem;
+    --radius-half: calc(var(--radius) / 2);
+    --radius-quarter: calc(var(--radius) / 4);
+
+    --fs-h1: 5.61rem;
+    --fs-h2: 4.209rem;
+    --fs-h3: 3.157rem;
+    --fs-h4: 2.369rem;
+    --fs-h5: 1.777rem;
+    --fs-h6: 1.333rem;
+    --fs-p: 1rem;
+    --fs-sm: 0.75rem;
+    --fs-xs: 0.563rem;
+
+    --space-0: 0.25rem;
+    --space-1: 0.333rem;
+    --space-2: 0.444rem;
+    --space-3: 0.593rem;
+    --space-4: 0.79rem;
+    --space-5: 1.054rem;
+    --space-6: 1.405rem;
+    --space-7: 1.873rem;
+    --space-8: 2.497rem;
+    --space-9: 3.33rem;
+    --space-10: 4.437rem;
+    --space-11: 5.916rem;
+    --space-12: 7.888rem;
+
+    --space-xs: var(--space-1);
+    --space-sm: var(--space-2);
+    --space-md: var(--space-4);
+    --space-lg: var(--space-6);
+    --space-xl: var(--space-8);
+
+    --max-content-width: 1400px;
+    --padding-inline: 1rem;
+    --max-card-width: 425px;
+}

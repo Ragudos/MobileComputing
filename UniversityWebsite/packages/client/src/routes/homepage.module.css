@@ -1,364 +1,59 @@
-.but {
-    margin-top: 20px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
+.mainContent section {
+    padding-block: var(--space-12);
 
-.journeySection {
-    background-color: hsl(var(--clr-primary));
-    padding: 80px 20px;
-    border-radius: 20px;
-    text-align: center;
-}
-
-/* Testimonials Carousel */
-.testimonialSection {
-    margin: 48px 0;
-    padding: 2.5rem 1.5rem;
-    background: hsl(var(--clr-background));
-    border-radius: var(--radius);
-    box-shadow: 0 4px 24px 0 rgba(0,0,0,0.07);
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.testimonialTitle {
-    text-align: center;
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 2rem;
-    color: hsl(var(--clr-primary));
-}
-
-.testimonialCarousel {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1.5rem;
-}
-
-.testimonialCard {
-    background: hsl(var(--clr-card));
-    border-radius: var(--radius);
-    box-shadow: 0 2px 12px 0 rgba(0,0,0,0.06);
-    padding: 2rem 2.5rem;
-    min-width: 260px;
-    max-width: 100%;
-    text-align: center;
-    color: hsl(var(--clr-card-foreground));
-    font-size: 1.15rem;
-    position: relative;
-}
-
-.testimonialQuote {
-    font-style: italic;
-    font-size: 1.18rem;
-    margin-bottom: 1.2rem;
-    color: hsl(var(--clr-foreground));
-}
-
-.testimonialAuthor {
-    font-weight: 600;
-    color: hsl(var(--clr-primary));
-    font-size: 1rem;
-}
-
-.testimonialNavBtn {
-    background: hsl(var(--clr-primary));
-    color: hsl(var(--clr-primary-foreground));
-    border: none;
-    border-radius: 50%;
-    width: 2.5rem;
-    height: 2.5rem;
-    font-size: 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background 0.18s, color 0.18s, transform 0.18s;
-    box-shadow: 0 1px 4px 0 rgba(0,0,0,0.08);
-}
-.testimonialNavBtn:hover, .testimonialNavBtn:focus {
-    background: hsl(var(--clr-accent));
-    color: hsl(var(--clr-accent-foreground));
-    transform: scale(1.08);
-}
-/* Life at Sigma Section */
-.lifeSection {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 20px;
-    margin: 48px 0;
-}
-
-.lifeImageRow {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
-
-.lifeImage {
-    width: 100%;
-    max-width: 800px;
-    border-radius: var(--radius);
-    object-fit: cover;
-    box-shadow: 0 4px 24px 0 rgba(0,0,0,0.10);
-}
-
-.lifeTextRow {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 1.25rem;
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.lifeList {
-    list-style: none;
-    padding-left: 0;
-    margin: 0;
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    align-items: flex-start;
-}
-
-.lifeList li {
-    position: relative;
-    padding: 0.75rem 1.25rem 0.75rem 2.5rem;
-    background: hsl(var(--clr-background));
-    border-radius: var(--radius-half);
-    font-size: 1.08rem;
-    color: hsl(var(--clr-foreground));
-    box-shadow: 0 1px 4px 0 rgba(0,0,0,0.04);
-    transition: background 0.18s, box-shadow 0.18s, transform 0.18s;
-    cursor: default;
-}
-
-.lifeList li::before {
-    content: "";
-    position: absolute;
-    left: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 0.85em;
-    height: 0.85em;
-    border-radius: 50%;
-    background: linear-gradient(135deg, hsl(var(--clr-primary)), hsl(var(--clr-accent)));
-    box-shadow: 0 1px 4px 0 rgba(0,0,0,0.10);
-}
-
-.lifeList li:hover {
-    background: hsl(var(--clr-secondary) / 0.13);
-    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.08);
-    transform: translateY(-2px) scale(1.01);
-}
-
-/* Sigma Advantage Section */
-.advantageSection {
-    background: hsl(var(--clr-primary));
-    background-image: url('/sec4img.jpg');
-    background-size: cover;
-    background-position: center;
-    min-height: 60vh;
-    position: relative;
-    overflow: hidden;
-    border-radius: var(--radius);
-    padding: 2.5rem 1.5rem;
-    margin: 48px 0;
-    box-shadow: 0 4px 24px 0 rgba(0,0,0,0.08);
-    color: hsl(var(--clr-primary-foreground));
-    max-width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-
-}
-
-.advantageTitle {
-    text-align: center;
-    font-size: 3rem;
-    font-weight: 700;
-    margin-bottom: 1.5rem;
-    color: white;
-    letter-spacing: 0.01em;
-}
-
-.advantageList {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-}
-
-.advantageItem {
-    background: hsl(var(--clr-card));
-    color: hsl(var(--clr-card-foreground));
-    border-radius: var(--radius);
-    padding: 1.25rem 1.5rem;
-    font-size: 1.1rem;
-    font-weight: 500;
-    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.06);
-    transition: transform 0.18s cubic-bezier(.4,2,.6,1), box-shadow 0.18s, background 0.18s;
-    cursor: pointer;
-    will-change: transform, box-shadow;
-    position: relative;
-    z-index: 1;
-}
-
-.advantageItem:hover, .advantageItem:focus {
-    transform: translateY(-3px) scale(1.01);
-    box-shadow: 0 4px 16px 0 rgba(0,0,0,0.08);
-    background: hsl(var(--clr-accent));
-    color: hsl(var(--clr-accent-foreground));
-    z-index: 2;
-}
-
-.bentoSection {
-    margin: 48px 0;
-    padding: 32px 0;
-    background: hsl(var(--clr-background));
-    border-radius: var(--radius);
-}
-
-.bentoTitle {
-    text-align: center;
-    font-size: 3rem;
-    font-weight: 700;
-    margin-bottom: 0.5em;
-}
-
-.bentoSubtitle {
-    text-align: center;
-    color: hsl(var(--clr-muted-foreground));
-    margin-bottom: 2em;
-}
-
-.bentoGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 24px;
-    max-width: 900px;
-    margin: 0 auto;
+    place-items: center;
+    text-align: center;
+
+    p {
+        max-width: max(70vw, 70ch);
+    }
 }
 
-.bentoCard {
-    background: linear-gradient(135deg, hsl(var(--clr-card)) 60%, hsl(var(--clr-secondary)) 100%);
-    border-radius: var(--radius);
-    box-shadow: 0 2px 12px 0 rgba(0,0,0,0.06);
-    padding: 32px 24px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    transition: transform 0.15s, box-shadow 0.15s;
+.heroSection {
+    --_radius: var(--radius);
+
     position: relative;
-    min-height: 120px;
-    color: hsl(var(--clr-card-foreground));
-}
 
-.bentoCard:hover {
-    transform: translateY(-6px) scale(1.03);
-    box-shadow: 0 6px 24px 0 rgba(0,0,0,0.10);
-}
+    padding-inline: var(--space-6);
 
-.bentoCardIndex {
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: hsl(var(--clr-primary));
-    margin-bottom: 0.5em;
-}
+    &::before,
+    &::after {
+        content: "";
 
-.bentoCardText {
-    font-size: 1.1rem;
-    color: hsl(var(--clr-foreground));
-    font-weight: 500;
-}
-.row1 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;    /* horizontal centering */
-  justify-content: center; /* vertical centering */
-  text-align: center;      /* center text inside */
-  /* If you want it to take full height of parent, add: */
-  /* height: 100%; */
-}
+        position: absolute;
 
-.missionSection {
-    display: flex;
-    justify-content: center;
-    align-items: center;      
-    margin-top: 20px;
-    gap: 40px;
-}
+        inset: 0;
+        margin: auto;
 
-.section2Image {
-  object-fit: cover;
-  width: 3500px;
-  height: auto;
-  border-radius: 20px;
-  justify-content: flex-end;
-}
+        width: 100%;
+        height: 100%;
+        border-radius: var(--_radius);
+    }
 
-.blurText {
-    font-weight: 500;
-    
-}
+    &::before {
+        background-image: url("/images/heroBackground.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
 
-.paraText {
-    max-width: 50%;
-    margin-bottom: 10px;
-}
+        z-index: -2;
+    }
 
-.heroBackground {
-    background-image: url('/heroBackground.png');
-    background-size: cover;
-    background-position: center;
-    min-height: 60vh;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    border-radius: 20px;
-}
+    &::after {
+        background: linear-gradient(
+            to bottom,
+            hsl(var(--clr-background) / var(--_background-opacity, 0.25)) 0%,
+            hsl(var(--clr-background) / var(--_background-opacity, 1)) 100%
+        );
 
-.heroBackground::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: inherit;
-    background-size: inherit;
-    background-position: inherit;
-    filter: blur(8px);
-    z-index: 1;
-}
+        z-index: -1;
+    }
 
-.heroBackground::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: 2;
+    .contentContainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--space-6);
+    }
 }
-
-.heroBackground > * {
-    position: relative;
-    z-index: 3;
-}
-

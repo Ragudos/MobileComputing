@@ -24,10 +24,16 @@
         color: hsl(var(--clr-foreground) / var(--_text-opacity, 1));
 
         --_text-opacity: 0.75;
+
+        &:hover {
+            --_text-opacity: 0.87;
+            text-decoration: underline;
+        }
     }
 
     li a[aria-current="page"] {
         --_text-opacity: 1;
+        text-decoration: underline;
     }
 }
 

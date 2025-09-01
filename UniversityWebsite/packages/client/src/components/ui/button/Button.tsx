@@ -1,6 +1,5 @@
 import { combineClassesOrNone } from "@/lib/utils";
 import { ButtonHTMLAttributes, forwardRef } from "react";
-import buttonStyles from "./button.module.css";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     variant?:
@@ -10,21 +9,17 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
         | "destructive"
         | "success"
         | "outline"
-        | "default";
-    size?: "small" | "medium" | "large" | "icon" | "any";
+        | "default"
+        | "cta";
+    size?: "small" | "medium" | "large" | "icon";
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-    ({ className, variant = "default", size = "any", ...props }, ref) => {
+    ({ className, variant = "default", size, ...props }, ref) => {
         return (
             <button
                 ref={ref}
-                className={combineClassesOrNone(
-                    buttonStyles.button,
-                    buttonStyles[variant],
-                    buttonStyles[size],
-                    className
-                )}
+                className={combineClassesOrNone(variant, size, className)}
                 {...props}
             />
         );

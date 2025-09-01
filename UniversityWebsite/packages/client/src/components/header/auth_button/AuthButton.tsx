@@ -7,7 +7,7 @@ import { useAuth } from "@/lib/hooks";
 import { extractErrorMessage } from "@/lib/utils";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { useTransition } from "react";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { toast } from "sonner";
 
 export function AuthButton() {
@@ -97,11 +97,9 @@ function ProfileButton() {
 }
 
 function LoginButton() {
-    const navigate = useNavigate();
-
-    function onClick() {
-        navigate("/auth/login");
-    }
-
-    return <Button onClick={onClick}>Login</Button>;
+    return (
+        <Link className="cta" to={"/auth/login"}>
+            Login
+        </Link>
+    );
 }
