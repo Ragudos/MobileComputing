@@ -4,6 +4,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { Toaster } from "sonner";
 import App from "./App";
+import ClickSpark from "./components/react-bits/ClickSpark";
 import { AuthContextProvider } from "./context/AuthContext";
 
 const appElement = document.getElementById("app");
@@ -19,10 +20,15 @@ createRoot(appElement).render(
         <Toaster richColors={true} />
         <QueryClientProvider client={queryClient}>
             <AuthContextProvider>
-                <App />
+                <ClickSpark
+                    sparkCount={10}
+                    sparkSize={16}
+                    sparkRadius={24}
+                    sparkColor="hsl(161 49% 51%)"
+                >
+                    <App />
+                </ClickSpark>
             </AuthContextProvider>
         </QueryClientProvider>
     </StrictMode>
 );
-
-console.log(import.meta.env.VITE_API_URL);
