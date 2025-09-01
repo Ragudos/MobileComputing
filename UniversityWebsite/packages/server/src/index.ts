@@ -6,7 +6,9 @@ import rateLimit from "express-rate-limit";
 import morgan from "morgan";
 import indexRouter from "./routes";
 
-const app = express();
+const app = express({
+    trustProxy: true,
+});
 const server = app.listen(
     PORT,
     IS_DEVELOPMENT ? "127.0.0.1" : "0.0.0.0",

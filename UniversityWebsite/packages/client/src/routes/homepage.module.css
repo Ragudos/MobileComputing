@@ -337,41 +337,41 @@
 @media screen and (min-width: 640px) {
     .testimonialsList {
         grid-template-columns: 1fr 1fr;
-    }
 
-    li {
-        height: 90%;
-    }
+        li {
+            height: 90%;
+        }
 
-    li:nth-child(1),
-    li:nth-child(3),
-    li:nth-child(5) {
-        align-self: flex-start;
-    }
+        li:nth-child(1),
+        li:nth-child(3),
+        li:nth-child(5) {
+            align-self: flex-start;
+        }
 
-    li:nth-child(2),
-    li:nth-child(4) {
-        align-self: flex-end;
+        li:nth-child(2),
+        li:nth-child(4) {
+            align-self: flex-end;
+        }
     }
 }
 
 @media screen and (min-width: 1000px) {
     .testimonialsList {
         grid-template-columns: 1fr 1fr 1fr;
-    }
 
-    li:nth-child(1),
-    li:nth-child(4) {
-        align-self: flex-start;
-    }
+        li:nth-child(1),
+        li:nth-child(4) {
+            align-self: flex-start;
+        }
 
-    li:nth-child(2),
-    li:nth-child(5) {
-        align-self: center;
-    }
+        li:nth-child(2),
+        li:nth-child(5) {
+            align-self: center;
+        }
 
-    li:nth-child(3) {
-        align-self: flex-end;
+        li:nth-child(3) {
+            align-self: flex-end;
+        }
     }
 }
 
