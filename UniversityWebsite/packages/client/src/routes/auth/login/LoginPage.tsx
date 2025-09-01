@@ -66,9 +66,8 @@ function LoginPage() {
             return;
         }
 
-        const id = toast.loading("Logging in...");
-
         startTransition(async () => {
+            const id = toast.loading("Logging in...");
             try {
                 await loginUser({ email, password, honeypot });
 

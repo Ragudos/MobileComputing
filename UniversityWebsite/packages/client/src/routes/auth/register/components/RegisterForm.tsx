@@ -54,9 +54,8 @@ function RegisterForm() {
             return;
         }
 
-        const id = toast.loading("Creating account...");
-
         startTransition(async () => {
+            const id = toast.loading("Creating account...");
             try {
                 await registerUser({
                     email,

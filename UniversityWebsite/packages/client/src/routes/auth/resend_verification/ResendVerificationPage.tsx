@@ -37,9 +37,8 @@ function ResendVerificationPage() {
             return;
         }
 
-        const id = toast.loading("Sending verification email...");
-
         startTransition(async () => {
+            const id = toast.loading("Sending verification email...");
             try {
                 await resendVerificationEmail(email);
 
