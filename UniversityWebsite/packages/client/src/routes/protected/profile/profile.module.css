@@ -74,7 +74,7 @@
     align-items: center;
     gap: var(--space-8);
 
-    text-align: start;
+    text-align: center;
 
     ul {
         width: 100%;
@@ -85,6 +85,11 @@
 }
 
 @media screen and (min-width: 768px) {
+    .metadataContainer {
+        text-align: start;
+        flex-direction: row;
+    }
+
     .contentContainer {
         flex-direction: row;
         justify-content: flex-start;
