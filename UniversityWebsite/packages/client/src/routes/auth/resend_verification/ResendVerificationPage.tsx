@@ -39,8 +39,8 @@ function ResendVerificationPage() {
 
         const id = toast.loading("Sending verification email...");
 
-        try {
-            startTransition(async () => {
+        startTransition(async () => {
+            try {
                 await resendVerificationEmail(email);
 
                 startTransition(() => {
@@ -55,14 +55,14 @@ function ResendVerificationPage() {
                         }
                     );
                 });
-            });
-        } catch (err) {
-            console.error(err);
+            } catch (err) {
+                console.error(err);
 
-            startTransition(() => {
-                toast.error(extractErrorMessage(err), { id });
-            });
-        }
+                startTransition(() => {
+                    toast.error(extractErrorMessage(err), { id });
+                });
+            }
+        });
     }
 
     function changeEmail(e: ChangeEvent<HTMLInputElement>) {
