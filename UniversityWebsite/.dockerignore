@@ -1,14 +1,6 @@
-.env
-.env.local
-.env.development
-.env.production
-dist
-node_modules
-*.lnk
-.git
-.gitignore
-*.md
-.venv
-.pyc
-.lock
-.sock
+# Ignore dependency folders
+**/node_modules
+**/npm-debug.log
+**/.pnpm-store
+**/dist
+**/build

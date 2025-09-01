@@ -1,5 +1,5 @@
 import { AuthContext } from "@/context/AuthContext";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 
 export function useAuth() {
     const context = useContext(AuthContext);
@@ -9,4 +9,24 @@ export function useAuth() {
     }
 
     return context;
+}
+
+export function useMediaQuery(query: string) {
+    const [matches, setMatches] = useState(false);
+
+    useEffect(() => {
+        const mediaQuery = window.matchMedia(query);
+        setMatches(mediaQuery.matches);
+
+        const handleChange = (event: MediaQueryListEvent) => {
+            setMatches(event.matches);
+        };
+
+        mediaQuery.addEventListener("change", handleChange);
+        return () => {
+            mediaQuery.removeEventListener("change", handleChange);
+        };
+    }, [query]);
+
+    return matches;
 }

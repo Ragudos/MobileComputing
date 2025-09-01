@@ -1,9 +1,12 @@
 .mainContent section {
     padding-block: var(--space-12);
+    padding-inline: var(--space-6);
 
     display: grid;
     place-items: center;
     text-align: center;
+
+    overflow: clip;
 
     p {
         max-width: max(70vw, 70ch);
@@ -12,6 +15,7 @@
 
 .heroSection {
     --_radius: var(--radius);
+    min-height: 80dvh;
 
     position: relative;
 
@@ -67,9 +71,6 @@
     }
 }
 
-.missionContent {
-}
-
 .missionImageContainer {
     img {
         border-radius: var(--radius);
@@ -90,5 +91,250 @@
 
     .missionImageContainer {
         flex: 0.6;
+    }
+}
+
+.benefitsSection {
+    position: relative;
+    background: linear-gradient(
+        45deg,
+        hsl(var(--clr-secondary) / var(--_background-opacity, 0.25)) 50%,
+        hsl(var(--clr-accent) / var(--_background-opacity, 1)) 100%
+    );
+
+    .contentContainer {
+        display: grid;
+        place-items: center;
+    }
+
+    .contentWrapper {
+        display: flex;
+        flex-direction: column;
+
+        gap: var(--space-10);
+    }
+
+    .benefitsList {
+        display: grid;
+        gap: var(--space-4);
+        grid-template-columns: 1fr 1fr;
+
+        li {
+            padding: var(--space-4) var(--space-6);
+
+            backdrop-filter: blur(16px);
+            border-radius: var(--radius-half);
+            box-shadow:
+                0 8px 32px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5),
+                inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+                inset 0 0 20px 10px rgba(255, 255, 255, 1);
+
+            background: rgba(255, 255, 255, 0.15);
+            position: relative;
+            overflow: hidden;
+
+            &::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 1px;
+                background: linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(255, 255, 255, 0.8),
+                    transparent
+                );
+            }
+
+            &::after {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 1px;
+                height: 100%;
+                background: linear-gradient(
+                    180deg,
+                    rgba(255, 255, 255, 0.8),
+                    transparent,
+                    rgba(255, 255, 255, 0.3)
+                );
+            }
+        }
+    }
+}
+
+.programsSection {
+    .contentWrapper {
+        display: flex;
+        flex-direction: column;
+
+        gap: var(--space-10);
+    }
+}
+
+.programsContainer {
+    .programsList {
+        --_gap: 1rem;
+
+        padding-block: 1rem;
+
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: var(--_gap, 1rem);
+    }
+}
+
+.programsContainer[data-animated="true"] {
+    max-width: 800px;
+    overflow: hidden;
+
+    mask: linear-gradient(
+        90deg,
+        transparent,
+        hsl(var(--clr-background)) 20%,
+        hsl(var(--clr-background)) 80%,
+        transparent
+    );
+
+    .programsList {
+        width: max-content;
+        flex-wrap: nowrap;
+
+        animation: scroll var(--_animation-duration, 40s)
+            var(--_animation-direction, forwards) linear infinite;
+
+        li {
+            background-color: hsl(
+                var(--clr-accent) / var(--_background-opacity, 1)
+            );
+            color: hsl(var(--clr-accent-foreground) / var(--_text-opacity, 1));
+
+            padding: var(--space-4) var(--space-6);
+            border-radius: var(--radius);
+
+            box-shadow:
+                0 1px 1px hsl(0 0% 0% / 0.75),
+                0 2px 2px hsl(0 0% 0% / 0.5),
+                0 4px 4px hsl(0 0% 0% / 0.5),
+                0 8px 8px hsl(0 0% 0% / 0.25);
+        }
+    }
+}
+
+@keyframes scroll {
+    to {
+        transform: translate(calc(-50% - var(--_gap, 1) / 2));
+    }
+}
+
+@supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+        .heroSection {
+            .contentContainer {
+                animation: fade-out 1s linear;
+                animation-timeline: view();
+                animation-range: exit -200px;
+            }
+        }
+
+        .missionSection {
+            .missionContent {
+                opacity: 0;
+                transform: translateX(-100%);
+
+                animation: slide-right 1s linear forwards;
+                animation-timeline: view();
+                animation-range: 250px 500px;
+            }
+
+            .missionImageContainer {
+                opacity: 0;
+                transform: translateX(100%);
+
+                animation: slide-left 1s linear forwards;
+                animation-timeline: view();
+                animation-range: 250px 500px;
+            }
+        }
+
+        .benefitsSection {
+            .contentContainer {
+                opacity: 0;
+                transform: scale(0);
+
+                animation: pop-up 1s linear forwards;
+                animation-timeline: view();
+                animation-range: 250px 500px;
+            }
+
+            .benefitsList {
+                opacity: 0;
+                transform: translateY(100%);
+
+                animation: slide-up 1s linear forwards;
+                animation-timeline: view();
+                animation-range: 250px 500px;
+            }
+        }
+    }
+}
+
+@keyframes fade-in {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fade-out {
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes pop-up {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes slide-left {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slide-right {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slide-up {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
     }
 }

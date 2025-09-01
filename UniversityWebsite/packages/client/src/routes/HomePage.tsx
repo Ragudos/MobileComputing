@@ -1,7 +1,14 @@
+import { useMediaQuery } from "@/lib/hooks";
 import siteData from "@/lib/site_data.json";
 import { combineClassesOrNone } from "@/lib/utils";
+import { UNIVERSITY_PROGRAMS } from "@university-website/shared";
 import { Link } from "react-router";
 import homepageStyles from "./homepage.module.css";
+
+const programs = UNIVERSITY_PROGRAMS.map((program, idx) => ({
+    title: program.split(")")[0] + ")",
+    description: program.split(")")[1] || "",
+}));
 
 const testimonials = [
     {
@@ -26,6 +33,14 @@ const testimonials = [
     },
 ];
 
+const benefits = [
+    "Cutting-edge curriculum designed with industry leaders",
+    "State-of-the-art labs, libraries, and digital resources",
+    "Experienced faculty and global partnerships",
+    "Strong focus on leadership, ethics, and innovation",
+    "A vibrant student community with 50+ clubs and organizations",
+];
+
 function HomePage() {
     return (
         <main
@@ -41,7 +56,7 @@ function HomePage() {
                 className={homepageStyles.heroSection}
             >
                 <div className={homepageStyles.contentContainer}>
-                    <div>
+                    <div className={homepageStyles.heroContent}>
                         <h1 className="brandingFont" id="hero-title">
                             {siteData.sections.hero.title}
                         </h1>
@@ -91,13 +106,20 @@ function HomePage() {
                 aria-describedby="benefits-desc"
                 className={homepageStyles.benefitsSection}
             >
-                <div className={homepageStyles.contentContainer}>
-                    <h2 id="benefits-title">
-                        {siteData.sections.benefits.title}
-                    </h2>
-                    <p id="benefits-desc">
-                        {siteData.sections.benefits.subtitle}
-                    </p>
+                <div className={homepageStyles.contentWrapper}>
+                    <div className={homepageStyles.contentContainer}>
+                        <h2 id="benefits-title">
+                            {siteData.sections.benefits.title}
+                        </h2>
+                        <p id="benefits-desc">
+                            {siteData.sections.benefits.subtitle}
+                        </p>
+                    </div>
+                    <ul className={homepageStyles.benefitsList}>
+                        {benefits.map((benefit, index) => (
+                            <li key={index + benefit}>{benefit}</li>
+                        ))}
+                    </ul>
                 </div>
             </section>
 
@@ -107,13 +129,17 @@ function HomePage() {
                 aria-describedby="programs-desc"
                 className={homepageStyles.programsSection}
             >
-                <div className={homepageStyles.contentContainer}>
-                    <h2 id="programs-title">
-                        {siteData.sections.programs.title}
-                    </h2>
-                    <p id="programs-desc">
-                        {siteData.sections.programs.subtitle}
-                    </p>
+                <div className={homepageStyles.contentWrapper}>
+                    <div className={homepageStyles.contentContainer}>
+                        <h2 id="programs-title">
+                            {siteData.sections.programs.title}
+                        </h2>
+                        <p id="programs-desc">
+                            {siteData.sections.programs.subtitle}
+                        </p>
+                    </div>
+
+                    <Programs />
                 </div>
             </section>
 
@@ -149,6 +175,36 @@ function HomePage() {
                 </div>
             </section>
         </main>
+    );
+}
+
+function Programs() {
+    const matches = useMediaQuery("(prefers-reduced-motion: no-preference)");
+
+    return (
+        <div
+            data-animated={matches}
+            className={homepageStyles.programsContainer}
+        >
+            <ul className={homepageStyles.programsList}>
+                {programs.map((program) => (
+                    <li key={program.title}>
+                        <div>{program.title}</div>
+                        <div>{program.description}</div>
+                    </li>
+                ))}
+                {matches && (
+                    <>
+                        {programs.map((program) => (
+                            <li aria-hidden="true" key={program.title + "2"}>
+                                <div>{program.title}</div>
+                                <div>{program.description}</div>
+                            </li>
+                        ))}
+                    </>
+                )}
+            </ul>
+        </div>
     );
 }
 

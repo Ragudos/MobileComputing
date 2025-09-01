@@ -1,8 +1,5 @@
 packages:
   - packages/*
-injectWorkspacePackages: true
 onlyBuiltDependencies:
   - esbuild
   - unrs-resolver
-syncInjectedDepsAfterScripts:
-  - build
